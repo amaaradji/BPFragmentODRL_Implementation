@@ -1,0 +1,10 @@
+matplotlib
+pandas
+numpy
+lxml
+requests
+beautifulsoup4
+networkx
+pytest
+tqdm
+seaborn

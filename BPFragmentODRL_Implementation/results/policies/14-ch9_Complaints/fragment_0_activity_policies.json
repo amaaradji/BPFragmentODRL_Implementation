@@ -1,0 +1,35 @@
+{
+  "Complaint\nreceived": {
+    "@context": "http://www.w3.org/ns/odrl.jsonld",
+    "uid": "http://example.com/policy:Complaint\nreceived_q9kwz6j5",
+    "@type": "Set",
+    "permission": [
+      {
+        "uid": "http://example.com/rule:Complaint\nreceived_permission_70y9wuhi",
+        "target": "http://example.com/asset:Complaint\nreceived",
+        "action": "execute"
+      }
+    ],
+    "prohibition": [
+      {
+        "uid": "http://example.com/rule:Complaint\nreceived_prohibition_whkq6l41",
+        "target": "http://example.com/asset:Complaint\nreceived",
+        "action": "modify",
+        "constraint": [
+          {
+            "leftOperand": "role",
+            "operator": "neq",
+            "rightOperand": "admin"
+          }
+        ]
+      }
+    ],
+    "obligation": [
+      {
+        "uid": "http://example.com/rule:Complaint\nreceived_obligation_fa7n3j53",
+        "target": "http://example.com/asset:Complaint\nreceived",
+        "action": "log"
+      }
+    ]
+  }
+}

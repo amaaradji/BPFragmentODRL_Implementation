@@ -1,0 +1,54 @@
+{
+  "loan\napplication\ncanceled": {
+    "@context": "http://www.w3.org/ns/odrl.jsonld",
+    "uid": "http://example.com/policy:loan\napplication\ncanceled_i73t66p3",
+    "@type": "Set",
+    "permission": [
+      {
+        "uid": "http://example.com/rule:loan\napplication\ncanceled_permission_hulf4m1a",
+        "target": "http://example.com/asset:loan\napplication\ncanceled",
+        "action": "execute",
+        "constraint": [
+          {
+            "leftOperand": "dateTime",
+            "operator": "gt",
+            "rightOperand": "2025-04-04"
+          }
+        ]
+      },
+      {
+        "uid": "http://example.com/rule:loan\napplication\ncanceled_permission_j1bq1ysc",
+        "target": "http://example.com/asset:loan\napplication\ncanceled",
+        "action": "read"
+      }
+    ],
+    "prohibition": [
+      {
+        "uid": "http://example.com/rule:loan\napplication\ncanceled_prohibition_zcrprcby",
+        "target": "http://example.com/asset:loan\napplication\ncanceled",
+        "action": "modify",
+        "constraint": [
+          {
+            "leftOperand": "role",
+            "operator": "neq",
+            "rightOperand": "admin"
+          }
+        ]
+      }
+    ],
+    "obligation": [
+      {
+        "uid": "http://example.com/rule:loan\napplication\ncanceled_obligation_n99tpyn6",
+        "target": "http://example.com/asset:loan\napplication\ncanceled",
+        "action": "log",
+        "constraint": [
+          {
+            "leftOperand": "event",
+            "operator": "eq",
+            "rightOperand": "execution_complete"
+          }
+        ]
+      }
+    ]
+  }
+}

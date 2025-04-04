@@ -1,0 +1,54 @@
+{
+  "Select suitable equipment": {
+    "@context": "http://www.w3.org/ns/odrl.jsonld",
+    "uid": "http://example.com/policy:Select suitable equipment_x9y2iiga",
+    "@type": "Set",
+    "permission": [
+      {
+        "uid": "http://example.com/rule:Select suitable equipment_permission_l60mo089",
+        "target": "http://example.com/asset:Select suitable equipment",
+        "action": "execute",
+        "constraint": [
+          {
+            "leftOperand": "dateTime",
+            "operator": "lt",
+            "rightOperand": "2025-12-28"
+          }
+        ]
+      },
+      {
+        "uid": "http://example.com/rule:Select suitable equipment_permission_e3ag7tiz",
+        "target": "http://example.com/asset:Select suitable equipment",
+        "action": "read",
+        "constraint": [
+          {
+            "leftOperand": "role",
+            "operator": "eq",
+            "rightOperand": "user"
+          }
+        ]
+      }
+    ],
+    "prohibition": [
+      {
+        "uid": "http://example.com/rule:Select suitable equipment_prohibition_xi4kfqea",
+        "target": "http://example.com/asset:Select suitable equipment",
+        "action": "modify"
+      }
+    ],
+    "obligation": [
+      {
+        "uid": "http://example.com/rule:Select suitable equipment_obligation_1v1wcjr6",
+        "target": "http://example.com/asset:Select suitable equipment",
+        "action": "log",
+        "constraint": [
+          {
+            "leftOperand": "event",
+            "operator": "eq",
+            "rightOperand": "execution_complete"
+          }
+        ]
+      }
+    ]
+  }
+}

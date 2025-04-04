@@ -1,0 +1,28 @@
+{
+  "Application\nhandled": {
+    "@context": "http://www.w3.org/ns/odrl.jsonld",
+    "uid": "http://example.com/policy:Application\nhandled_oihbyjn1",
+    "@type": "Set",
+    "permission": [
+      {
+        "uid": "http://example.com/rule:Application\nhandled_permission_36789ags",
+        "target": "http://example.com/asset:Application\nhandled",
+        "action": "read"
+      }
+    ],
+    "prohibition": [
+      {
+        "uid": "http://example.com/rule:Application\nhandled_prohibition_7to32iqy",
+        "target": "http://example.com/asset:Application\nhandled",
+        "action": "modify"
+      }
+    ],
+    "obligation": [
+      {
+        "uid": "http://example.com/rule:Application\nhandled_obligation_43s14eoy",
+        "target": "http://example.com/asset:Application\nhandled",
+        "action": "log"
+      }
+    ]
+  }
+}

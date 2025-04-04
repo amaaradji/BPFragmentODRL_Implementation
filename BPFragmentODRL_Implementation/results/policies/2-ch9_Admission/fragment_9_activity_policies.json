@@ -1,0 +1,49 @@
+{
+  "Application\naccepted": {
+    "@context": "http://www.w3.org/ns/odrl.jsonld",
+    "uid": "http://example.com/policy:Application\naccepted_o8lw88do",
+    "@type": "Set",
+    "permission": [
+      {
+        "uid": "http://example.com/rule:Application\naccepted_permission_1c770qmo",
+        "target": "http://example.com/asset:Application\naccepted",
+        "action": "read",
+        "constraint": [
+          {
+            "leftOperand": "role",
+            "operator": "eq",
+            "rightOperand": "admin"
+          }
+        ]
+      }
+    ],
+    "prohibition": [
+      {
+        "uid": "http://example.com/rule:Application\naccepted_prohibition_63gzhj1y",
+        "target": "http://example.com/asset:Application\naccepted",
+        "action": "modify",
+        "constraint": [
+          {
+            "leftOperand": "role",
+            "operator": "neq",
+            "rightOperand": "admin"
+          }
+        ]
+      }
+    ],
+    "obligation": [
+      {
+        "uid": "http://example.com/rule:Application\naccepted_obligation_of74ytov",
+        "target": "http://example.com/asset:Application\naccepted",
+        "action": "log",
+        "constraint": [
+          {
+            "leftOperand": "event",
+            "operator": "eq",
+            "rightOperand": "execution_complete"
+          }
+        ]
+      }
+    ]
+  }
+}

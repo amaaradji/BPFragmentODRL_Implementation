@@ -1,0 +1,40 @@
+{
+    "@context": "http://www.w3.org/ns/odrl.jsonld",
+    "uid": "http://example.com/policy:bp_main",
+    "@type": "Agreement",
+    "permission": [
+      {
+        "uid": "ruleA",
+        "target": "http://example.com/asset/A",
+        "action": "execute",
+        "constraint": [
+          {
+            "leftOperand": "dateTime",
+            "operator": "lteq",
+            "rightOperand": {
+              "@value": "2025-01-01",
+              "@type": "xsd:date"
+            }
+          }
+        ]
+      }
+    ],
+    "prohibition": [
+      {
+        "uid": "ruleB",
+        "target": "http://example.com/asset/B",
+        "action": "trigger",
+        "constraint": [
+          {
+            "leftOperand": "dateTime",
+            "operator": "gteq",
+            "rightOperand": {
+              "@value": "2025-12-31",
+              "@type": "xsd:date"
+            }
+          }
+        ]
+      }
+    ]
+  }
+  

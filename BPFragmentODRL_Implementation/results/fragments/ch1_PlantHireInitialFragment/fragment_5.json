@@ -1,0 +1,11 @@
+{
+  "id": 4,
+  "activities": [
+    "Check availability"
+  ],
+  "gateways": [],
+  "entry_points": [
+    "Check availability"
+  ],
+  "exit_points": []
+}

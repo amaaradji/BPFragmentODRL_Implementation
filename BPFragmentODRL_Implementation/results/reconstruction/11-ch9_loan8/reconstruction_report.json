@@ -1,0 +1,298 @@
+{
+  "total_rules": {
+    "original": 10,
+    "reconstructed": 13
+  },
+  "rule_types": {
+    "permission": {
+      "original": 4,
+      "reconstructed": 5,
+      "matched": 4
+    },
+    "prohibition": {
+      "original": 3,
+      "reconstructed": 4,
+      "matched": 3
+    },
+    "obligation": {
+      "original": 3,
+      "reconstructed": 4,
+      "matched": 3
+    }
+  },
+  "matched_rules": [
+    {
+      "type": "permission",
+      "original": {
+        "uid": "http://example.com/rule:Loan\napplication\nreceived_permission_aayk5501_original",
+        "target": "http://example.com/asset:Loan\napplication\nreceived",
+        "action": "read",
+        "constraint": [
+          {
+            "leftOperand": "role",
+            "operator": "eq",
+            "rightOperand": "user"
+          }
+        ]
+      },
+      "reconstructed": {
+        "uid": "http://example.com/rule:Loan\napplication\nreceived_permission_aayk5501_reconstructed",
+        "target": "http://example.com/asset:Loan\napplication\nreceived",
+        "action": "read",
+        "constraint": [
+          {
+            "leftOperand": "role",
+            "operator": "eq",
+            "rightOperand": "user"
+          }
+        ]
+      }
+    },
+    {
+      "type": "permission",
+      "original": {
+        "uid": "http://example.com/rule:Loan \napplication\ncanceled_permission_lbdh3wa1_original",
+        "target": "http://example.com/asset:Loan \napplication\ncanceled",
+        "action": "execute",
+        "constraint": [
+          {
+            "leftOperand": "dateTime",
+            "operator": "gt",
+            "rightOperand": "2025-04-04"
+          },
+          {
+            "leftOperand": "dateTime",
+            "operator": "lt",
+            "rightOperand": "2025-06-24"
+          }
+        ]
+      },
+      "reconstructed": {
+        "uid": "http://example.com/rule:Loan \napplication\ncanceled_permission_lbdh3wa1_reconstructed",
+        "target": "http://example.com/asset:Loan \napplication\ncanceled",
+        "action": "execute",
+        "constraint": [
+          {
+            "leftOperand": "dateTime",
+            "operator": "gt",
+            "rightOperand": "2025-04-04"
+          },
+          {
+            "leftOperand": "dateTime",
+            "operator": "lt",
+            "rightOperand": "2025-06-24"
+          }
+        ]
+      }
+    },
+    {
+      "type": "permission",
+      "original": {
+        "uid": "http://example.com/rule:Loan \napplication\ncanceled_permission_jhb8tshf_original",
+        "target": "http://example.com/asset:Loan \napplication\ncanceled",
+        "action": "read",
+        "constraint": [
+          {
+            "leftOperand": "role",
+            "operator": "eq",
+            "rightOperand": "manager"
+          }
+        ]
+      },
+      "reconstructed": {
+        "uid": "http://example.com/rule:Loan \napplication\ncanceled_permission_jhb8tshf_reconstructed",
+        "target": "http://example.com/asset:Loan \napplication\ncanceled",
+        "action": "read",
+        "constraint": [
+          {
+            "leftOperand": "role",
+            "operator": "eq",
+            "rightOperand": "manager"
+          }
+        ]
+      }
+    },
+    {
+      "type": "permission",
+      "original": {
+        "uid": "http://example.com/rule:Loan\napplication\ncanceled_permission_pcy3cxm9_original",
+        "target": "http://example.com/asset:Loan\napplication\ncanceled",
+        "action": "execute",
+        "constraint": [
+          {
+            "leftOperand": "dateTime",
+            "operator": "gt",
+            "rightOperand": "2025-04-04"
+          }
+        ]
+      },
+      "reconstructed": {
+        "uid": "http://example.com/rule:Loan\napplication\ncanceled_permission_pcy3cxm9_reconstructed",
+        "target": "http://example.com/asset:Loan\napplication\ncanceled",
+        "action": "execute",
+        "constraint": [
+          {
+            "leftOperand": "dateTime",
+            "operator": "gt",
+            "rightOperand": "2025-04-04"
+          }
+        ]
+      }
+    },
+    {
+      "type": "prohibition",
+      "original": {
+        "uid": "http://example.com/rule:Loan\napplication\nreceived_prohibition_xksgbtmy_original",
+        "target": "http://example.com/asset:Loan\napplication\nreceived",
+        "action": "modify",
+        "constraint": [
+          {
+            "leftOperand": "role",
+            "operator": "neq",
+            "rightOperand": "admin"
+          }
+        ]
+      },
+      "reconstructed": {
+        "uid": "http://example.com/rule:Loan\napplication\nreceived_prohibition_xksgbtmy_reconstructed",
+        "target": "http://example.com/asset:Loan\napplication\nreceived",
+        "action": "modify",
+        "constraint": [
+          {
+            "leftOperand": "role",
+            "operator": "neq",
+            "rightOperand": "admin"
+          }
+        ]
+      }
+    },
+    {
+      "type": "prohibition",
+      "original": {
+        "uid": "http://example.com/rule:Loan \napplication\ncanceled_prohibition_mhztjrqj_original",
+        "target": "http://example.com/asset:Loan \napplication\ncanceled",
+        "action": "modify"
+      },
+      "reconstructed": {
+        "uid": "http://example.com/rule:Loan \napplication\ncanceled_prohibition_mhztjrqj_reconstructed",
+        "target": "http://example.com/asset:Loan \napplication\ncanceled",
+        "action": "modify"
+      }
+    },
+    {
+      "type": "prohibition",
+      "original": {
+        "uid": "http://example.com/rule:Loan\napplication\ncanceled_prohibition_xc26atoq_original",
+        "target": "http://example.com/asset:Loan\napplication\ncanceled",
+        "action": "modify"
+      },
+      "reconstructed": {
+        "uid": "http://example.com/rule:Loan\napplication\ncanceled_prohibition_xc26atoq_reconstructed",
+        "target": "http://example.com/asset:Loan\napplication\ncanceled",
+        "action": "modify"
+      }
+    },
+    {
+      "type": "obligation",
+      "original": {
+        "uid": "http://example.com/rule:Loan\napplication\nreceived_obligation_j5afermg_original",
+        "target": "http://example.com/asset:Loan\napplication\nreceived",
+        "action": "log"
+      },
+      "reconstructed": {
+        "uid": "http://example.com/rule:Loan\napplication\nreceived_obligation_j5afermg_reconstructed",
+        "target": "http://example.com/asset:Loan\napplication\nreceived",
+        "action": "log"
+      }
+    },
+    {
+      "type": "obligation",
+      "original": {
+        "uid": "http://example.com/rule:Loan \napplication\ncanceled_obligation_76zvhm2p_original",
+        "target": "http://example.com/asset:Loan \napplication\ncanceled",
+        "action": "log"
+      },
+      "reconstructed": {
+        "uid": "http://example.com/rule:Loan \napplication\ncanceled_obligation_76zvhm2p_reconstructed",
+        "target": "http://example.com/asset:Loan \napplication\ncanceled",
+        "action": "log"
+      }
+    },
+    {
+      "type": "obligation",
+      "original": {
+        "uid": "http://example.com/rule:Loan\napplication\ncanceled_obligation_234iejbo_original",
+        "target": "http://example.com/asset:Loan\napplication\ncanceled",
+        "action": "log",
+        "constraint": [
+          {
+            "leftOperand": "event",
+            "operator": "eq",
+            "rightOperand": "execution_complete"
+          }
+        ]
+      },
+      "reconstructed": {
+        "uid": "http://example.com/rule:Loan\napplication\ncanceled_obligation_234iejbo_reconstructed",
+        "target": "http://example.com/asset:Loan\napplication\ncanceled",
+        "action": "log",
+        "constraint": [
+          {
+            "leftOperand": "event",
+            "operator": "eq",
+            "rightOperand": "execution_complete"
+          }
+        ]
+      }
+    }
+  ],
+  "lost_rules": [],
+  "new_rules": [
+    {
+      "type": "permission",
+      "rule": {
+        "uid": "http://example.com/rule:Loan\napplication\nrejected_permission_f10qwkjt_reconstructed",
+        "target": "http://example.com/asset:Loan\napplication\nrejected",
+        "action": "read",
+        "constraint": [
+          {
+            "leftOperand": "role",
+            "operator": "eq",
+            "rightOperand": "manager"
+          }
+        ]
+      }
+    },
+    {
+      "type": "prohibition",
+      "rule": {
+        "uid": "http://example.com/rule:Loan\napplication\nrejected_prohibition_txoqi994_reconstructed",
+        "target": "http://example.com/asset:Loan\napplication\nrejected",
+        "action": "modify",
+        "constraint": [
+          {
+            "leftOperand": "role",
+            "operator": "neq",
+            "rightOperand": "admin"
+          }
+        ]
+      }
+    },
+    {
+      "type": "obligation",
+      "rule": {
+        "uid": "http://example.com/rule:Loan\napplication\nrejected_obligation_5bkn8k6l_reconstructed",
+        "target": "http://example.com/asset:Loan\napplication\nrejected",
+        "action": "log",
+        "constraint": [
+          {
+            "leftOperand": "event",
+            "operator": "eq",
+            "rightOperand": "execution_complete"
+          }
+        ]
+      }
+    }
+  ],
+  "accuracy": 1.0
+}

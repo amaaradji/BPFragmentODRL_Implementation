@@ -1,0 +1,40 @@
+{
+  "PO \nCreated": {
+    "@context": "http://www.w3.org/ns/odrl.jsonld",
+    "uid": "http://example.com/policy:PO \nCreated_ugu5fae6",
+    "@type": "Set",
+    "permission": [
+      {
+        "uid": "http://example.com/rule:PO \nCreated_permission_aa0cxmeb",
+        "target": "http://example.com/asset:PO \nCreated",
+        "action": "read",
+        "constraint": [
+          {
+            "leftOperand": "role",
+            "operator": "eq",
+            "rightOperand": "manager"
+          }
+        ]
+      },
+      {
+        "uid": "http://example.com/rule:PO \nCreated_permission_xlfur1k1",
+        "target": "http://example.com/asset:PO \nCreated",
+        "action": "execute"
+      }
+    ],
+    "prohibition": [
+      {
+        "uid": "http://example.com/rule:PO \nCreated_prohibition_omr597v9",
+        "target": "http://example.com/asset:PO \nCreated",
+        "action": "modify"
+      }
+    ],
+    "obligation": [
+      {
+        "uid": "http://example.com/rule:PO \nCreated_obligation_djsaw550",
+        "target": "http://example.com/asset:PO \nCreated",
+        "action": "log"
+      }
+    ]
+  }
+}

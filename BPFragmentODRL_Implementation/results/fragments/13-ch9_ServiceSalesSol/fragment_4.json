@@ -1,0 +1,9 @@
+{
+  "id": 3,
+  "activities": [],
+  "gateways": [],
+  "entry_points": [
+    "Application\nreceived"
+  ],
+  "exit_points": []
+}

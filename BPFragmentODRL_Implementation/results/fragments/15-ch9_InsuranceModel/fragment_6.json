@@ -1,0 +1,11 @@
+{
+  "id": 5,
+  "activities": [
+    "Initiate payment"
+  ],
+  "gateways": [],
+  "entry_points": [
+    "Initiate payment"
+  ],
+  "exit_points": []
+}

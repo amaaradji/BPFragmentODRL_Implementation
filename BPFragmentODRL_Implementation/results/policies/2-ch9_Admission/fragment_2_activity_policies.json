@@ -1,0 +1,52 @@
+{
+  "Degrees\nvalidity\nverification\nrequired": {
+    "@context": "http://www.w3.org/ns/odrl.jsonld",
+    "uid": "http://example.com/policy:Degrees\nvalidity\nverification\nrequired_rq2ushzi",
+    "@type": "Set",
+    "permission": [
+      {
+        "uid": "http://example.com/rule:Degrees\nvalidity\nverification\nrequired_permission_e15cjs7b",
+        "target": "http://example.com/asset:Degrees\nvalidity\nverification\nrequired",
+        "action": "read"
+      },
+      {
+        "uid": "http://example.com/rule:Degrees\nvalidity\nverification\nrequired_permission_3q5mzunk",
+        "target": "http://example.com/asset:Degrees\nvalidity\nverification\nrequired",
+        "action": "execute",
+        "constraint": [
+          {
+            "leftOperand": "dateTime",
+            "operator": "lt",
+            "rightOperand": "2025-08-13"
+          },
+          {
+            "leftOperand": "dateTime",
+            "operator": "gt",
+            "rightOperand": "2025-04-04"
+          }
+        ]
+      }
+    ],
+    "prohibition": [
+      {
+        "uid": "http://example.com/rule:Degrees\nvalidity\nverification\nrequired_prohibition_a608uz3l",
+        "target": "http://example.com/asset:Degrees\nvalidity\nverification\nrequired",
+        "action": "modify"
+      }
+    ],
+    "obligation": [
+      {
+        "uid": "http://example.com/rule:Degrees\nvalidity\nverification\nrequired_obligation_duwwh8tq",
+        "target": "http://example.com/asset:Degrees\nvalidity\nverification\nrequired",
+        "action": "log",
+        "constraint": [
+          {
+            "leftOperand": "event",
+            "operator": "eq",
+            "rightOperand": "execution_complete"
+          }
+        ]
+      }
+    ]
+  }
+}

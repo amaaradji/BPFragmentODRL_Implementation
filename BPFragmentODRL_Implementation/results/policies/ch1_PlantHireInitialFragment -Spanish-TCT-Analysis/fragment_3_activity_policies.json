@@ -1,0 +1,40 @@
+{
+  "Seleccionar equipo en cat\u00e1logo": {
+    "@context": "http://www.w3.org/ns/odrl.jsonld",
+    "uid": "http://example.com/policy:Seleccionar equipo en cat\u00e1logo_hl6yfxtq",
+    "@type": "Set",
+    "permission": [
+      {
+        "uid": "http://example.com/rule:Seleccionar equipo en cat\u00e1logo_permission_vcjnao1k",
+        "target": "http://example.com/asset:Seleccionar equipo en cat\u00e1logo",
+        "action": "execute",
+        "constraint": [
+          {
+            "leftOperand": "dateTime",
+            "operator": "gt",
+            "rightOperand": "2025-04-04"
+          },
+          {
+            "leftOperand": "dateTime",
+            "operator": "lt",
+            "rightOperand": "2026-03-13"
+          }
+        ]
+      }
+    ],
+    "prohibition": [
+      {
+        "uid": "http://example.com/rule:Seleccionar equipo en cat\u00e1logo_prohibition_68lbitcw",
+        "target": "http://example.com/asset:Seleccionar equipo en cat\u00e1logo",
+        "action": "modify"
+      }
+    ],
+    "obligation": [
+      {
+        "uid": "http://example.com/rule:Seleccionar equipo en cat\u00e1logo_obligation_rfyzdp3s",
+        "target": "http://example.com/asset:Seleccionar equipo en cat\u00e1logo",
+        "action": "log"
+      }
+    ]
+  }
+}

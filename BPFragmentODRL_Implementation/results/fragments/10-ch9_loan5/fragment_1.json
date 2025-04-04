@@ -1,0 +1,11 @@
+{
+  "id": 0,
+  "activities": [
+    "Loan\napplication\nreceived"
+  ],
+  "gateways": [],
+  "entry_points": [
+    "Loan\napplication\nreceived"
+  ],
+  "exit_points": []
+}

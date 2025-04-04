@@ -1,0 +1,95 @@
+{
+  "total_rules": {
+    "original": 3,
+    "reconstructed": 3
+  },
+  "rule_types": {
+    "permission": {
+      "original": 1,
+      "reconstructed": 1,
+      "matched": 1
+    },
+    "prohibition": {
+      "original": 1,
+      "reconstructed": 1,
+      "matched": 1
+    },
+    "obligation": {
+      "original": 1,
+      "reconstructed": 1,
+      "matched": 1
+    }
+  },
+  "matched_rules": [
+    {
+      "type": "permission",
+      "original": {
+        "uid": "http://example.com/rule:Order\nfulfilled_permission_etmca42t_original",
+        "target": "http://example.com/asset:Order\nfulfilled",
+        "action": "execute",
+        "constraint": [
+          {
+            "leftOperand": "dateTime",
+            "operator": "gt",
+            "rightOperand": "2025-04-04"
+          }
+        ]
+      },
+      "reconstructed": {
+        "uid": "http://example.com/rule:Order\nfulfilled_permission_etmca42t_reconstructed",
+        "target": "http://example.com/asset:Order\nfulfilled",
+        "action": "execute",
+        "constraint": [
+          {
+            "leftOperand": "dateTime",
+            "operator": "gt",
+            "rightOperand": "2025-04-04"
+          }
+        ]
+      }
+    },
+    {
+      "type": "prohibition",
+      "original": {
+        "uid": "http://example.com/rule:Order\nfulfilled_prohibition_ibhbhn4e_original",
+        "target": "http://example.com/asset:Order\nfulfilled",
+        "action": "modify",
+        "constraint": [
+          {
+            "leftOperand": "role",
+            "operator": "neq",
+            "rightOperand": "admin"
+          }
+        ]
+      },
+      "reconstructed": {
+        "uid": "http://example.com/rule:Order\nfulfilled_prohibition_ibhbhn4e_reconstructed",
+        "target": "http://example.com/asset:Order\nfulfilled",
+        "action": "modify",
+        "constraint": [
+          {
+            "leftOperand": "role",
+            "operator": "neq",
+            "rightOperand": "admin"
+          }
+        ]
+      }
+    },
+    {
+      "type": "obligation",
+      "original": {
+        "uid": "http://example.com/rule:Order\nfulfilled_obligation_6xvhg7rr_original",
+        "target": "http://example.com/asset:Order\nfulfilled",
+        "action": "log"
+      },
+      "reconstructed": {
+        "uid": "http://example.com/rule:Order\nfulfilled_obligation_6xvhg7rr_reconstructed",
+        "target": "http://example.com/asset:Order\nfulfilled",
+        "action": "log"
+      }
+    }
+  ],
+  "lost_rules": [],
+  "new_rules": [],
+  "accuracy": 1.0
+}

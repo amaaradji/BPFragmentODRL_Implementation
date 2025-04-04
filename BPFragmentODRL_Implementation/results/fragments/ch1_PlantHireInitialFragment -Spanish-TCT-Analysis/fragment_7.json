@@ -1,0 +1,11 @@
+{
+  "id": 6,
+  "activities": [
+    "Someter solicitud de alquiler de equipo"
+  ],
+  "gateways": [],
+  "entry_points": [
+    "Someter solicitud de alquiler de equipo"
+  ],
+  "exit_points": []
+}

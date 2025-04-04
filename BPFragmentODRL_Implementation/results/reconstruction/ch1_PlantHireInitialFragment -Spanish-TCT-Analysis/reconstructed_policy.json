@@ -1,0 +1,256 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "uid": "http://example.com/policy:reconstructed",
+  "@type": "Set",
+  "permission": [
+    {
+      "uid": "http://example.com/rule:Se necesita \nnuevo equipo_permission_jc9ksyzq_reconstructed",
+      "target": "http://example.com/asset:Se necesita \nnuevo equipo",
+      "action": "execute",
+      "constraint": [
+        {
+          "leftOperand": "dateTime",
+          "operator": "gt",
+          "rightOperand": "2025-04-04"
+        },
+        {
+          "leftOperand": "dateTime",
+          "operator": "lt",
+          "rightOperand": "2025-08-06"
+        }
+      ]
+    },
+    {
+      "uid": "http://example.com/rule:Se necesita \nnuevo equipo_permission_o56yfjgk_reconstructed",
+      "target": "http://example.com/asset:Se necesita \nnuevo equipo",
+      "action": "read"
+    },
+    {
+      "uid": "http://example.com/rule:Pedido \ncreado_permission_f8hmsbeu_reconstructed",
+      "target": "http://example.com/asset:Pedido \ncreado",
+      "action": "read"
+    },
+    {
+      "uid": "http://example.com/rule:Pedido \ncreado_permission_je45e8jo_reconstructed",
+      "target": "http://example.com/asset:Pedido \ncreado",
+      "action": "execute",
+      "constraint": [
+        {
+          "leftOperand": "dateTime",
+          "operator": "gt",
+          "rightOperand": "2025-04-04"
+        }
+      ]
+    },
+    {
+      "uid": "http://example.com/rule:Seleccionar equipo en cat\u00e1logo_permission_vcjnao1k_reconstructed",
+      "target": "http://example.com/asset:Seleccionar equipo en cat\u00e1logo",
+      "action": "execute",
+      "constraint": [
+        {
+          "leftOperand": "dateTime",
+          "operator": "gt",
+          "rightOperand": "2025-04-04"
+        },
+        {
+          "leftOperand": "dateTime",
+          "operator": "lt",
+          "rightOperand": "2026-03-13"
+        }
+      ]
+    },
+    {
+      "uid": "http://example.com/rule:Verificar disponibilidad del equipo_permission_bwke6jx1_reconstructed",
+      "target": "http://example.com/asset:Verificar disponibilidad del equipo",
+      "action": "read"
+    },
+    {
+      "uid": "http://example.com/rule:Verificar disponibilidad del equipo_permission_atm5g0fd_reconstructed",
+      "target": "http://example.com/asset:Verificar disponibilidad del equipo",
+      "action": "execute",
+      "constraint": [
+        {
+          "leftOperand": "dateTime",
+          "operator": "gt",
+          "rightOperand": "2025-04-04"
+        }
+      ]
+    },
+    {
+      "uid": "http://example.com/rule:Crear Pedido_permission_exoqta5m_reconstructed",
+      "target": "http://example.com/asset:Crear Pedido",
+      "action": "execute",
+      "constraint": [
+        {
+          "leftOperand": "dateTime",
+          "operator": "gt",
+          "rightOperand": "2025-04-04"
+        }
+      ]
+    },
+    {
+      "uid": "http://example.com/rule:Crear Pedido_permission_smt5e8y6_reconstructed",
+      "target": "http://example.com/asset:Crear Pedido",
+      "action": "read"
+    },
+    {
+      "uid": "http://example.com/rule:Someter solicitud de alquiler de equipo_permission_isakfyhu_reconstructed",
+      "target": "http://example.com/asset:Someter solicitud de alquiler de equipo",
+      "action": "execute",
+      "constraint": [
+        {
+          "leftOperand": "dateTime",
+          "operator": "gt",
+          "rightOperand": "2025-04-04"
+        }
+      ]
+    },
+    {
+      "uid": "http://example.com/rule:Someter solicitud de alquiler de equipo_permission_5nbqn52v_reconstructed",
+      "target": "http://example.com/asset:Someter solicitud de alquiler de equipo",
+      "action": "read"
+    },
+    {
+      "uid": "http://example.com/rule:Evaluar solicitud de alquiler_permission_wlotwwtk_reconstructed",
+      "target": "http://example.com/asset:Evaluar solicitud de alquiler",
+      "action": "read",
+      "constraint": [
+        {
+          "leftOperand": "role",
+          "operator": "eq",
+          "rightOperand": "admin"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "uid": "http://example.com/rule:Se necesita \nnuevo equipo_prohibition_90jynm2m_reconstructed",
+      "target": "http://example.com/asset:Se necesita \nnuevo equipo",
+      "action": "modify",
+      "constraint": [
+        {
+          "leftOperand": "role",
+          "operator": "neq",
+          "rightOperand": "admin"
+        }
+      ]
+    },
+    {
+      "uid": "http://example.com/rule:Pedido \ncreado_prohibition_v9uzc2vm_reconstructed",
+      "target": "http://example.com/asset:Pedido \ncreado",
+      "action": "modify",
+      "constraint": [
+        {
+          "leftOperand": "role",
+          "operator": "neq",
+          "rightOperand": "admin"
+        }
+      ]
+    },
+    {
+      "uid": "http://example.com/rule:Seleccionar equipo en cat\u00e1logo_prohibition_68lbitcw_reconstructed",
+      "target": "http://example.com/asset:Seleccionar equipo en cat\u00e1logo",
+      "action": "modify"
+    },
+    {
+      "uid": "http://example.com/rule:Verificar disponibilidad del equipo_prohibition_sfa0n8pf_reconstructed",
+      "target": "http://example.com/asset:Verificar disponibilidad del equipo",
+      "action": "modify",
+      "constraint": [
+        {
+          "leftOperand": "role",
+          "operator": "neq",
+          "rightOperand": "admin"
+        }
+      ]
+    },
+    {
+      "uid": "http://example.com/rule:Crear Pedido_prohibition_jywx6bmc_reconstructed",
+      "target": "http://example.com/asset:Crear Pedido",
+      "action": "modify"
+    },
+    {
+      "uid": "http://example.com/rule:Someter solicitud de alquiler de equipo_prohibition_bjltno92_reconstructed",
+      "target": "http://example.com/asset:Someter solicitud de alquiler de equipo",
+      "action": "modify",
+      "constraint": [
+        {
+          "leftOperand": "role",
+          "operator": "neq",
+          "rightOperand": "admin"
+        }
+      ]
+    },
+    {
+      "uid": "http://example.com/rule:Evaluar solicitud de alquiler_prohibition_hftvyer8_reconstructed",
+      "target": "http://example.com/asset:Evaluar solicitud de alquiler",
+      "action": "modify",
+      "constraint": [
+        {
+          "leftOperand": "role",
+          "operator": "neq",
+          "rightOperand": "admin"
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "uid": "http://example.com/rule:Se necesita \nnuevo equipo_obligation_p9cc27av_reconstructed",
+      "target": "http://example.com/asset:Se necesita \nnuevo equipo",
+      "action": "log",
+      "constraint": [
+        {
+          "leftOperand": "event",
+          "operator": "eq",
+          "rightOperand": "execution_complete"
+        }
+      ]
+    },
+    {
+      "uid": "http://example.com/rule:Pedido \ncreado_obligation_cschck0k_reconstructed",
+      "target": "http://example.com/asset:Pedido \ncreado",
+      "action": "log"
+    },
+    {
+      "uid": "http://example.com/rule:Seleccionar equipo en cat\u00e1logo_obligation_rfyzdp3s_reconstructed",
+      "target": "http://example.com/asset:Seleccionar equipo en cat\u00e1logo",
+      "action": "log"
+    },
+    {
+      "uid": "http://example.com/rule:Verificar disponibilidad del equipo_obligation_oxkqkjyw_reconstructed",
+      "target": "http://example.com/asset:Verificar disponibilidad del equipo",
+      "action": "log"
+    },
+    {
+      "uid": "http://example.com/rule:Crear Pedido_obligation_51zhyqcn_reconstructed",
+      "target": "http://example.com/asset:Crear Pedido",
+      "action": "log",
+      "constraint": [
+        {
+          "leftOperand": "event",
+          "operator": "eq",
+          "rightOperand": "execution_complete"
+        }
+      ]
+    },
+    {
+      "uid": "http://example.com/rule:Someter solicitud de alquiler de equipo_obligation_1qgdp4he_reconstructed",
+      "target": "http://example.com/asset:Someter solicitud de alquiler de equipo",
+      "action": "log",
+      "constraint": [
+        {
+          "leftOperand": "event",
+          "operator": "eq",
+          "rightOperand": "execution_complete"
+        }
+      ]
+    },
+    {
+      "uid": "http://example.com/rule:Evaluar solicitud de alquiler_obligation_sgu8pbw6_reconstructed",
+      "target": "http://example.com/asset:Evaluar solicitud de alquiler",
+      "action": "log"
+    }
+  ]
+}

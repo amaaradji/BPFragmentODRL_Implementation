@@ -1,0 +1,11 @@
+{
+  "id": 6,
+  "activities": [
+    "Advise claimant"
+  ],
+  "gateways": [],
+  "entry_points": [
+    "Advise claimant"
+  ],
+  "exit_points": []
+}

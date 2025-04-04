@@ -1,0 +1,45 @@
+{
+  "Determine likelihood of the claim": {
+    "@context": "http://www.w3.org/ns/odrl.jsonld",
+    "uid": "http://example.com/policy:Determine likelihood of the claim_vjpgxllh",
+    "@type": "Set",
+    "permission": [
+      {
+        "uid": "http://example.com/rule:Determine likelihood of the claim_permission_0lgemrna",
+        "target": "http://example.com/asset:Determine likelihood of the claim",
+        "action": "execute",
+        "constraint": [
+          {
+            "leftOperand": "dateTime",
+            "operator": "lt",
+            "rightOperand": "2025-07-18"
+          },
+          {
+            "leftOperand": "dateTime",
+            "operator": "gt",
+            "rightOperand": "2025-04-04"
+          }
+        ]
+      },
+      {
+        "uid": "http://example.com/rule:Determine likelihood of the claim_permission_fzan3ow0",
+        "target": "http://example.com/asset:Determine likelihood of the claim",
+        "action": "read"
+      }
+    ],
+    "prohibition": [
+      {
+        "uid": "http://example.com/rule:Determine likelihood of the claim_prohibition_0jxxsgpf",
+        "target": "http://example.com/asset:Determine likelihood of the claim",
+        "action": "modify"
+      }
+    ],
+    "obligation": [
+      {
+        "uid": "http://example.com/rule:Determine likelihood of the claim_obligation_u4t168ny",
+        "target": "http://example.com/asset:Determine likelihood of the claim",
+        "action": "log"
+      }
+    ]
+  }
+}

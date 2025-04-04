@@ -1,0 +1,26 @@
+[
+  {
+    "type": "permission_prohibition",
+    "fragment_id": 7,
+    "activity": "Review rental \nrequest",
+    "action": "approve",
+    "permission": {
+      "uid": "http://example.com/rule:Review rental \nrequest_permission_a4f1m0yg",
+      "target": "http://example.com/asset:Review rental \nrequest",
+      "action": "approve"
+    },
+    "prohibition": {
+      "uid": "http://example.com/rule:Review rental \nrequest_prohibition_5dmh4wzk",
+      "target": "http://example.com/asset:Review rental \nrequest",
+      "action": "approve",
+      "constraint": [
+        {
+          "leftOperand": "role",
+          "operator": "eq",
+          "rightOperand": "requester"
+        }
+      ]
+    },
+    "description": "Permission and prohibition conflict for action 'approve' on activity 'Review rental \nrequest'"
+  }
+]

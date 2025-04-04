@@ -1,0 +1,47 @@
+{
+  "Crear Pedido": {
+    "@context": "http://www.w3.org/ns/odrl.jsonld",
+    "uid": "http://example.com/policy:Crear Pedido_3v5l4jm0",
+    "@type": "Set",
+    "permission": [
+      {
+        "uid": "http://example.com/rule:Crear Pedido_permission_exoqta5m",
+        "target": "http://example.com/asset:Crear Pedido",
+        "action": "execute",
+        "constraint": [
+          {
+            "leftOperand": "dateTime",
+            "operator": "gt",
+            "rightOperand": "2025-04-04"
+          }
+        ]
+      },
+      {
+        "uid": "http://example.com/rule:Crear Pedido_permission_smt5e8y6",
+        "target": "http://example.com/asset:Crear Pedido",
+        "action": "read"
+      }
+    ],
+    "prohibition": [
+      {
+        "uid": "http://example.com/rule:Crear Pedido_prohibition_jywx6bmc",
+        "target": "http://example.com/asset:Crear Pedido",
+        "action": "modify"
+      }
+    ],
+    "obligation": [
+      {
+        "uid": "http://example.com/rule:Crear Pedido_obligation_51zhyqcn",
+        "target": "http://example.com/asset:Crear Pedido",
+        "action": "log",
+        "constraint": [
+          {
+            "leftOperand": "event",
+            "operator": "eq",
+            "rightOperand": "execution_complete"
+          }
+        ]
+      }
+    ]
+  }
+}

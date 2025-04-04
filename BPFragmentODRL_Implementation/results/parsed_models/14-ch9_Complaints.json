@@ -1,0 +1,162 @@
+{
+  "activities": [
+    {
+      "id": "sid-93D7B05B-27D6-4533-98CF-7A7ADA47FD75",
+      "name": "Complaint\nreceived",
+      "type": "event",
+      "start": true
+    },
+    {
+      "id": "sid-0983E521-21EB-40F1-BEEF-F844A27A53E3",
+      "name": "Complaint\nnot addressed",
+      "type": "event",
+      "end": true
+    },
+    {
+      "id": "sid-6FB440D1-6370-4C30-A279-FE3532D13BC2",
+      "name": "Complaint\naddressed",
+      "type": "event",
+      "end": true
+    },
+    {
+      "id": "sid-8FFB91C7-482C-48B1-B8F4-6E26D6A6DD71",
+      "name": "Discuss\nsolution",
+      "type": "task"
+    },
+    {
+      "id": "sid-28E895E9-4184-4997-9F81-3946AC4E8344",
+      "name": "Propose\nsolution",
+      "type": "task"
+    },
+    {
+      "id": "sid-99D60779-6259-447C-BD8A-2C806ED727D7",
+      "name": "Execute\nsolution",
+      "type": "task"
+    },
+    {
+      "id": "sid-DB848843-843D-465F-AF1C-5BCEB59208A5",
+      "name": "Send automatic reply\nto customer",
+      "type": "task"
+    },
+    {
+      "id": "sid-5AEB0337-92A7-4AA6-B8F0-3B24CE093AF9",
+      "name": "Send\napology",
+      "type": "task"
+    },
+    {
+      "id": "sid-4E9B8148-159B-4A0B-AF7A-8EBF32EA51F3",
+      "name": "Evaluate\nacceptable alterantive",
+      "type": "task"
+    },
+    {
+      "id": "sid-0D2C5B4B-F707-49DF-9A66-7A97A1BCCC25",
+      "name": "Go to court",
+      "type": "task"
+    }
+  ],
+  "gateways": [
+    {
+      "id": "sid-73A40F9D-437D-42C8-BB6A-20F6DDF749F6",
+      "name": "XOR_sid-73A40F9D-437D-42C8-BB6A-20F6DDF749F6",
+      "type": "XOR"
+    },
+    {
+      "id": "sid-1F2D0096-8D0E-453B-80A7-A0AB615051FB",
+      "name": "EVENT_sid-1F2D0096-8D0E-453B-80A7-A0AB615051FB",
+      "type": "EVENT"
+    }
+  ],
+  "flows": [
+    {
+      "id": "sid-235CC295-362E-4A4D-BDA6-1F58DB8FE63C",
+      "from": "sid-1F2D0096-8D0E-453B-80A7-A0AB615051FB",
+      "to": "sid-CA285049-7F4F-42A5-B3E9-8FF2AD20640A",
+      "type": "sequence",
+      "gateway": "EVENT_sid-1F2D0096-8D0E-453B-80A7-A0AB615051FB"
+    },
+    {
+      "id": "sid-C8DA1AC9-782F-489E-8E57-CC416D4B63C6",
+      "from": "sid-1F2D0096-8D0E-453B-80A7-A0AB615051FB",
+      "to": "sid-4CEE1665-8AA4-4CFE-B80A-A38969556249",
+      "type": "sequence",
+      "gateway": "EVENT_sid-1F2D0096-8D0E-453B-80A7-A0AB615051FB"
+    },
+    {
+      "id": "sid-C8A77934-0B6B-4653-BA8C-0B5FB95D36ED",
+      "from": "sid-DB848843-843D-465F-AF1C-5BCEB59208A5",
+      "to": "sid-8FFB91C7-482C-48B1-B8F4-6E26D6A6DD71",
+      "type": "sequence"
+    },
+    {
+      "id": "sid-468CE2BA-89B9-4870-8E97-AE2251601DCF",
+      "from": "sid-CA285049-7F4F-42A5-B3E9-8FF2AD20640A",
+      "to": "sid-99D60779-6259-447C-BD8A-2C806ED727D7",
+      "type": "sequence"
+    },
+    {
+      "id": "sid-E0C42A53-4630-4329-9C36-881DF4FF61B3",
+      "from": "sid-4CEE1665-8AA4-4CFE-B80A-A38969556249",
+      "to": "sid-4E9B8148-159B-4A0B-AF7A-8EBF32EA51F3",
+      "type": "sequence"
+    },
+    {
+      "id": "sid-A7BC05F4-383C-49A0-8D69-82A5C32B4D09",
+      "from": "sid-4E9B8148-159B-4A0B-AF7A-8EBF32EA51F3",
+      "to": "sid-73A40F9D-437D-42C8-BB6A-20F6DDF749F6",
+      "type": "sequence",
+      "gateway": "XOR_sid-73A40F9D-437D-42C8-BB6A-20F6DDF749F6"
+    },
+    {
+      "id": "sid-2C981D1B-C0EF-4A7A-AAD9-BCC0FBFDF3D7",
+      "from": "sid-93D7B05B-27D6-4533-98CF-7A7ADA47FD75",
+      "to": "sid-DB848843-843D-465F-AF1C-5BCEB59208A5",
+      "type": "sequence"
+    },
+    {
+      "id": "sid-5D8BB9E0-42A4-4446-B6A1-E5978FA34DCA",
+      "from": "sid-0D2C5B4B-F707-49DF-9A66-7A97A1BCCC25",
+      "to": "sid-0983E521-21EB-40F1-BEEF-F844A27A53E3",
+      "type": "sequence"
+    },
+    {
+      "id": "sid-747FC1B8-52FF-4F72-9B55-DFA584E30728",
+      "from": "sid-99D60779-6259-447C-BD8A-2C806ED727D7",
+      "to": "sid-6FB440D1-6370-4C30-A279-FE3532D13BC2",
+      "type": "sequence"
+    },
+    {
+      "id": "sid-83D43E1A-81FC-4AFD-8561-9B082F60A9C8",
+      "from": "sid-8FFB91C7-482C-48B1-B8F4-6E26D6A6DD71",
+      "to": "sid-5AEB0337-92A7-4AA6-B8F0-3B24CE093AF9",
+      "type": "sequence"
+    },
+    {
+      "id": "sid-73434AD0-E74F-42F8-9573-9716280E9E05",
+      "from": "sid-5AEB0337-92A7-4AA6-B8F0-3B24CE093AF9",
+      "to": "sid-28E895E9-4184-4997-9F81-3946AC4E8344",
+      "type": "sequence"
+    },
+    {
+      "id": "sid-D5B25DD2-F66D-4A0A-BA46-B6F7CA937BE5",
+      "from": "sid-28E895E9-4184-4997-9F81-3946AC4E8344",
+      "to": "sid-1F2D0096-8D0E-453B-80A7-A0AB615051FB",
+      "type": "sequence",
+      "gateway": "EVENT_sid-1F2D0096-8D0E-453B-80A7-A0AB615051FB"
+    },
+    {
+      "id": "sid-71912300-E7DA-45AE-9E62-30F33E88B7C2",
+      "from": "sid-73A40F9D-437D-42C8-BB6A-20F6DDF749F6",
+      "to": "sid-8FFB91C7-482C-48B1-B8F4-6E26D6A6DD71",
+      "type": "sequence",
+      "gateway": "XOR_sid-73A40F9D-437D-42C8-BB6A-20F6DDF749F6"
+    },
+    {
+      "id": "sid-C83B0B13-60E5-4220-88D9-C7AD1BD05A10",
+      "from": "sid-73A40F9D-437D-42C8-BB6A-20F6DDF749F6",
+      "to": "sid-0D2C5B4B-F707-49DF-9A66-7A97A1BCCC25",
+      "type": "sequence",
+      "gateway": "XOR_sid-73A40F9D-437D-42C8-BB6A-20F6DDF749F6"
+    }
+  ],
+  "source_file": "14-ch9_Complaints.bpmn"
+}

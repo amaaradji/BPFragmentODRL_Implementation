@@ -1,0 +1,54 @@
+{
+  "Someter solicitud de alquiler de equipo": {
+    "@context": "http://www.w3.org/ns/odrl.jsonld",
+    "uid": "http://example.com/policy:Someter solicitud de alquiler de equipo_fjoiz3eh",
+    "@type": "Set",
+    "permission": [
+      {
+        "uid": "http://example.com/rule:Someter solicitud de alquiler de equipo_permission_isakfyhu",
+        "target": "http://example.com/asset:Someter solicitud de alquiler de equipo",
+        "action": "execute",
+        "constraint": [
+          {
+            "leftOperand": "dateTime",
+            "operator": "gt",
+            "rightOperand": "2025-04-04"
+          }
+        ]
+      },
+      {
+        "uid": "http://example.com/rule:Someter solicitud de alquiler de equipo_permission_5nbqn52v",
+        "target": "http://example.com/asset:Someter solicitud de alquiler de equipo",
+        "action": "read"
+      }
+    ],
+    "prohibition": [
+      {
+        "uid": "http://example.com/rule:Someter solicitud de alquiler de equipo_prohibition_bjltno92",
+        "target": "http://example.com/asset:Someter solicitud de alquiler de equipo",
+        "action": "modify",
+        "constraint": [
+          {
+            "leftOperand": "role",
+            "operator": "neq",
+            "rightOperand": "admin"
+          }
+        ]
+      }
+    ],
+    "obligation": [
+      {
+        "uid": "http://example.com/rule:Someter solicitud de alquiler de equipo_obligation_1qgdp4he",
+        "target": "http://example.com/asset:Someter solicitud de alquiler de equipo",
+        "action": "log",
+        "constraint": [
+          {
+            "leftOperand": "event",
+            "operator": "eq",
+            "rightOperand": "execution_complete"
+          }
+        ]
+      }
+    ]
+  }
+}

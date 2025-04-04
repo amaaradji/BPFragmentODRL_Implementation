@@ -1,0 +1,35 @@
+{
+  "Application\nrejected": {
+    "@context": "http://www.w3.org/ns/odrl.jsonld",
+    "uid": "http://example.com/policy:Application\nrejected_2rkggcla",
+    "@type": "Set",
+    "permission": [
+      {
+        "uid": "http://example.com/rule:Application\nrejected_permission_a4ckotss",
+        "target": "http://example.com/asset:Application\nrejected",
+        "action": "read",
+        "constraint": [
+          {
+            "leftOperand": "role",
+            "operator": "eq",
+            "rightOperand": "admin"
+          }
+        ]
+      }
+    ],
+    "prohibition": [
+      {
+        "uid": "http://example.com/rule:Application\nrejected_prohibition_nu9yn5oh",
+        "target": "http://example.com/asset:Application\nrejected",
+        "action": "modify"
+      }
+    ],
+    "obligation": [
+      {
+        "uid": "http://example.com/rule:Application\nrejected_obligation_o21tdado",
+        "target": "http://example.com/asset:Application\nrejected",
+        "action": "log"
+      }
+    ]
+  }
+}

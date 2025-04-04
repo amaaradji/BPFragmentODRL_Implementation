@@ -1,0 +1,15 @@
+{
+  "activities": [
+    {"name": "A", "type": "task", "start": true},
+    {"name": "B", "type": "task"},
+    {"name": "C", "type": "task"}
+  ],
+  "gateways": [
+    {"name": "G1", "type": "XOR"}
+  ],
+  "flows": [
+    {"from": "A", "to": "G1", "type": "sequence"},
+    {"from": "G1", "to": "B", "type": "sequence", "condition":"some condition"},
+    {"from": "G1", "to": "C", "type": "sequence", "condition":"other condition"}
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "Initiate payment": {
+    "@context": "http://www.w3.org/ns/odrl.jsonld",
+    "uid": "http://example.com/policy:Initiate payment_dt1fq1ck",
+    "@type": "Set",
+    "permission": [
+      {
+        "uid": "http://example.com/rule:Initiate payment_permission_ynnpa3bx",
+        "target": "http://example.com/asset:Initiate payment",
+        "action": "pay"
+      }
+    ],
+    "prohibition": [
+      {
+        "uid": "http://example.com/rule:Initiate payment_prohibition_yhjv527o",
+        "target": "http://example.com/asset:Initiate payment",
+        "action": "pay",
+        "constraint": [
+          {
+            "leftOperand": "amount",
+            "operator": "gt",
+            "rightOperand": "6368"
+          }
+        ]
+      }
+    ],
+    "obligation": [
+      {
+        "uid": "http://example.com/rule:Initiate payment_obligation_20alw5qw",
+        "target": "http://example.com/asset:Initiate payment",
+        "action": "record"
+      }
+    ]
+  }
+}

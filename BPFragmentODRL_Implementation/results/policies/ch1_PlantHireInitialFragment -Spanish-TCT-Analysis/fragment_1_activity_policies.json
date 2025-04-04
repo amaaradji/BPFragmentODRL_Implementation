@@ -1,0 +1,47 @@
+{
+  "Pedido \ncreado": {
+    "@context": "http://www.w3.org/ns/odrl.jsonld",
+    "uid": "http://example.com/policy:Pedido \ncreado_1e9noy5l",
+    "@type": "Set",
+    "permission": [
+      {
+        "uid": "http://example.com/rule:Pedido \ncreado_permission_f8hmsbeu",
+        "target": "http://example.com/asset:Pedido \ncreado",
+        "action": "read"
+      },
+      {
+        "uid": "http://example.com/rule:Pedido \ncreado_permission_je45e8jo",
+        "target": "http://example.com/asset:Pedido \ncreado",
+        "action": "execute",
+        "constraint": [
+          {
+            "leftOperand": "dateTime",
+            "operator": "gt",
+            "rightOperand": "2025-04-04"
+          }
+        ]
+      }
+    ],
+    "prohibition": [
+      {
+        "uid": "http://example.com/rule:Pedido \ncreado_prohibition_v9uzc2vm",
+        "target": "http://example.com/asset:Pedido \ncreado",
+        "action": "modify",
+        "constraint": [
+          {
+            "leftOperand": "role",
+            "operator": "neq",
+            "rightOperand": "admin"
+          }
+        ]
+      }
+    ],
+    "obligation": [
+      {
+        "uid": "http://example.com/rule:Pedido \ncreado_obligation_cschck0k",
+        "target": "http://example.com/asset:Pedido \ncreado",
+        "action": "log"
+      }
+    ]
+  }
+}

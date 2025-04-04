@@ -1,0 +1,11 @@
+{
+  "id": 5,
+  "activities": [
+    "Execute\nsolution"
+  ],
+  "gateways": [],
+  "entry_points": [
+    "Execute\nsolution"
+  ],
+  "exit_points": []
+}

@@ -1,0 +1,254 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "uid": "http://example.com/policy:reconstructed",
+  "@type": "Set",
+  "permission": [
+    {
+      "uid": "http://example.com/rule:Offer\nrequired_permission_ssmxih7v_reconstructed",
+      "target": "http://example.com/asset:Offer\nrequired",
+      "action": "read",
+      "constraint": [
+        {
+          "leftOperand": "role",
+          "operator": "eq",
+          "rightOperand": "user"
+        }
+      ]
+    },
+    {
+      "uid": "http://example.com/rule:Revocation\nto be handled_permission_uuy8kzvc_reconstructed",
+      "target": "http://example.com/asset:Revocation\nto be handled",
+      "action": "execute",
+      "constraint": [
+        {
+          "leftOperand": "dateTime",
+          "operator": "lt",
+          "rightOperand": "2025-09-21"
+        },
+        {
+          "leftOperand": "dateTime",
+          "operator": "gt",
+          "rightOperand": "2025-04-04"
+        }
+      ]
+    },
+    {
+      "uid": "http://example.com/rule:Revocation\nto be handled_permission_9ww4d3ai_reconstructed",
+      "target": "http://example.com/asset:Revocation\nto be handled",
+      "action": "read"
+    },
+    {
+      "uid": "http://example.com/rule:Application\naborted_permission_dafrlygx_reconstructed",
+      "target": "http://example.com/asset:Application\naborted",
+      "action": "read",
+      "constraint": [
+        {
+          "leftOperand": "role",
+          "operator": "eq",
+          "rightOperand": "user"
+        }
+      ]
+    },
+    {
+      "uid": "http://example.com/rule:Application\nrejected_permission_a4ckotss_reconstructed",
+      "target": "http://example.com/asset:Application\nrejected",
+      "action": "read",
+      "constraint": [
+        {
+          "leftOperand": "role",
+          "operator": "eq",
+          "rightOperand": "admin"
+        }
+      ]
+    },
+    {
+      "uid": "http://example.com/rule:Application\nhandled_permission_36789ags_reconstructed",
+      "target": "http://example.com/asset:Application\nhandled",
+      "action": "read"
+    },
+    {
+      "uid": "http://example.com/rule:Application\naccepted_permission_1da0x4m5_reconstructed",
+      "target": "http://example.com/asset:Application\naccepted",
+      "action": "execute",
+      "constraint": [
+        {
+          "leftOperand": "dateTime",
+          "operator": "gt",
+          "rightOperand": "2025-04-04"
+        },
+        {
+          "leftOperand": "dateTime",
+          "operator": "lt",
+          "rightOperand": "2025-09-03"
+        }
+      ]
+    },
+    {
+      "uid": "http://example.com/rule:Application\nprocessed_permission_8z1dwqgk_reconstructed",
+      "target": "http://example.com/asset:Application\nprocessed",
+      "action": "execute",
+      "constraint": [
+        {
+          "leftOperand": "dateTime",
+          "operator": "gt",
+          "rightOperand": "2025-04-04"
+        },
+        {
+          "leftOperand": "dateTime",
+          "operator": "lt",
+          "rightOperand": "2025-05-20"
+        }
+      ]
+    },
+    {
+      "uid": "http://example.com/rule:Application\nprocessed_permission_j3sjnsho_reconstructed",
+      "target": "http://example.com/asset:Application\nprocessed",
+      "action": "read"
+    },
+    {
+      "uid": "http://example.com/rule:Revocation\nhandled_permission_vy7fkkhg_reconstructed",
+      "target": "http://example.com/asset:Revocation\nhandled",
+      "action": "read",
+      "constraint": [
+        {
+          "leftOperand": "role",
+          "operator": "eq",
+          "rightOperand": "user"
+        }
+      ]
+    }
+  ],
+  "prohibition": [
+    {
+      "uid": "http://example.com/rule:Offer\nrequired_prohibition_p81u0vjy_reconstructed",
+      "target": "http://example.com/asset:Offer\nrequired",
+      "action": "modify",
+      "constraint": [
+        {
+          "leftOperand": "role",
+          "operator": "neq",
+          "rightOperand": "admin"
+        }
+      ]
+    },
+    {
+      "uid": "http://example.com/rule:Revocation\nto be handled_prohibition_ehm896k6_reconstructed",
+      "target": "http://example.com/asset:Revocation\nto be handled",
+      "action": "modify",
+      "constraint": [
+        {
+          "leftOperand": "role",
+          "operator": "neq",
+          "rightOperand": "admin"
+        }
+      ]
+    },
+    {
+      "uid": "http://example.com/rule:Application\naborted_prohibition_2z2rmxnu_reconstructed",
+      "target": "http://example.com/asset:Application\naborted",
+      "action": "modify",
+      "constraint": [
+        {
+          "leftOperand": "role",
+          "operator": "neq",
+          "rightOperand": "admin"
+        }
+      ]
+    },
+    {
+      "uid": "http://example.com/rule:Application\nrejected_prohibition_nu9yn5oh_reconstructed",
+      "target": "http://example.com/asset:Application\nrejected",
+      "action": "modify"
+    },
+    {
+      "uid": "http://example.com/rule:Application\nhandled_prohibition_7to32iqy_reconstructed",
+      "target": "http://example.com/asset:Application\nhandled",
+      "action": "modify"
+    },
+    {
+      "uid": "http://example.com/rule:Application\naccepted_prohibition_3pbzve5e_reconstructed",
+      "target": "http://example.com/asset:Application\naccepted",
+      "action": "modify",
+      "constraint": [
+        {
+          "leftOperand": "role",
+          "operator": "neq",
+          "rightOperand": "admin"
+        }
+      ]
+    },
+    {
+      "uid": "http://example.com/rule:Application\nprocessed_prohibition_rhsoyev6_reconstructed",
+      "target": "http://example.com/asset:Application\nprocessed",
+      "action": "modify"
+    },
+    {
+      "uid": "http://example.com/rule:Revocation\nhandled_prohibition_mtuua9fi_reconstructed",
+      "target": "http://example.com/asset:Revocation\nhandled",
+      "action": "modify",
+      "constraint": [
+        {
+          "leftOperand": "role",
+          "operator": "neq",
+          "rightOperand": "admin"
+        }
+      ]
+    }
+  ],
+  "obligation": [
+    {
+      "uid": "http://example.com/rule:Offer\nrequired_obligation_z4blwx25_reconstructed",
+      "target": "http://example.com/asset:Offer\nrequired",
+      "action": "log",
+      "constraint": [
+        {
+          "leftOperand": "event",
+          "operator": "eq",
+          "rightOperand": "execution_complete"
+        }
+      ]
+    },
+    {
+      "uid": "http://example.com/rule:Revocation\nto be handled_obligation_iurnm4bm_reconstructed",
+      "target": "http://example.com/asset:Revocation\nto be handled",
+      "action": "log"
+    },
+    {
+      "uid": "http://example.com/rule:Application\naborted_obligation_cxrn6s51_reconstructed",
+      "target": "http://example.com/asset:Application\naborted",
+      "action": "log"
+    },
+    {
+      "uid": "http://example.com/rule:Application\nrejected_obligation_o21tdado_reconstructed",
+      "target": "http://example.com/asset:Application\nrejected",
+      "action": "log"
+    },
+    {
+      "uid": "http://example.com/rule:Application\nhandled_obligation_43s14eoy_reconstructed",
+      "target": "http://example.com/asset:Application\nhandled",
+      "action": "log"
+    },
+    {
+      "uid": "http://example.com/rule:Application\naccepted_obligation_tru42lam_reconstructed",
+      "target": "http://example.com/asset:Application\naccepted",
+      "action": "log"
+    },
+    {
+      "uid": "http://example.com/rule:Application\nprocessed_obligation_l5mllb46_reconstructed",
+      "target": "http://example.com/asset:Application\nprocessed",
+      "action": "log"
+    },
+    {
+      "uid": "http://example.com/rule:Revocation\nhandled_obligation_c3adr039_reconstructed",
+      "target": "http://example.com/asset:Revocation\nhandled",
+      "action": "log",
+      "constraint": [
+        {
+          "leftOperand": "event",
+          "operator": "eq",
+          "rightOperand": "execution_complete"
+        }
+      ]
+    }
+  ]
+}

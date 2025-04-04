@@ -1,0 +1,11 @@
+{
+  "id": 7,
+  "activities": [
+    "Meeting\ncompleted"
+  ],
+  "gateways": [],
+  "entry_points": [
+    "Meeting\ncompleted"
+  ],
+  "exit_points": []
+}

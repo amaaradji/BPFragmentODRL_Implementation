@@ -1,0 +1,52 @@
+{
+  "Degrees\nvalidity\nverified": {
+    "@context": "http://www.w3.org/ns/odrl.jsonld",
+    "uid": "http://example.com/policy:Degrees\nvalidity\nverified_5djtqi2k",
+    "@type": "Set",
+    "permission": [
+      {
+        "uid": "http://example.com/rule:Degrees\nvalidity\nverified_permission_7t576xyg",
+        "target": "http://example.com/asset:Degrees\nvalidity\nverified",
+        "action": "read"
+      },
+      {
+        "uid": "http://example.com/rule:Degrees\nvalidity\nverified_permission_w6xiygb5",
+        "target": "http://example.com/asset:Degrees\nvalidity\nverified",
+        "action": "execute",
+        "constraint": [
+          {
+            "leftOperand": "dateTime",
+            "operator": "gt",
+            "rightOperand": "2025-04-04"
+          },
+          {
+            "leftOperand": "dateTime",
+            "operator": "lt",
+            "rightOperand": "2025-06-18"
+          }
+        ]
+      }
+    ],
+    "prohibition": [
+      {
+        "uid": "http://example.com/rule:Degrees\nvalidity\nverified_prohibition_ew3gl4ny",
+        "target": "http://example.com/asset:Degrees\nvalidity\nverified",
+        "action": "modify",
+        "constraint": [
+          {
+            "leftOperand": "role",
+            "operator": "neq",
+            "rightOperand": "admin"
+          }
+        ]
+      }
+    ],
+    "obligation": [
+      {
+        "uid": "http://example.com/rule:Degrees\nvalidity\nverified_obligation_ykrdfglg",
+        "target": "http://example.com/asset:Degrees\nvalidity\nverified",
+        "action": "log"
+      }
+    ]
+  }
+}

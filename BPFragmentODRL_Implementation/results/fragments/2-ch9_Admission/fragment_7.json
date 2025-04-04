@@ -1,0 +1,11 @@
+{
+  "id": 6,
+  "activities": [
+    "Application\nbatched"
+  ],
+  "gateways": [],
+  "entry_points": [
+    "Application\nbatched"
+  ],
+  "exit_points": []
+}

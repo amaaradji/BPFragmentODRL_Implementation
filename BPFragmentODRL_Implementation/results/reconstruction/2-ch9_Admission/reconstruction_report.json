@@ -1,0 +1,544 @@
+{
+  "total_rules": {
+    "original": 14,
+    "reconstructed": 26
+  },
+  "rule_types": {
+    "permission": {
+      "original": 6,
+      "reconstructed": 12,
+      "matched": 6
+    },
+    "prohibition": {
+      "original": 4,
+      "reconstructed": 7,
+      "matched": 4
+    },
+    "obligation": {
+      "original": 4,
+      "reconstructed": 7,
+      "matched": 4
+    }
+  },
+  "matched_rules": [
+    {
+      "type": "permission",
+      "original": {
+        "uid": "http://example.com/rule:Meeting\nday_permission_el2oycqx_original",
+        "target": "http://example.com/asset:Meeting\nday",
+        "action": "execute",
+        "constraint": [
+          {
+            "leftOperand": "dateTime",
+            "operator": "lt",
+            "rightOperand": "2026-04-02"
+          }
+        ]
+      },
+      "reconstructed": {
+        "uid": "http://example.com/rule:Meeting\nday_permission_el2oycqx_reconstructed",
+        "target": "http://example.com/asset:Meeting\nday",
+        "action": "execute",
+        "constraint": [
+          {
+            "leftOperand": "dateTime",
+            "operator": "lt",
+            "rightOperand": "2026-04-02"
+          }
+        ]
+      }
+    },
+    {
+      "type": "permission",
+      "original": {
+        "uid": "http://example.com/rule:Meeting\nday_permission_8julnv2d_original",
+        "target": "http://example.com/asset:Meeting\nday",
+        "action": "read",
+        "constraint": [
+          {
+            "leftOperand": "role",
+            "operator": "eq",
+            "rightOperand": "admin"
+          }
+        ]
+      },
+      "reconstructed": {
+        "uid": "http://example.com/rule:Meeting\nday_permission_8julnv2d_reconstructed",
+        "target": "http://example.com/asset:Meeting\nday",
+        "action": "read",
+        "constraint": [
+          {
+            "leftOperand": "role",
+            "operator": "eq",
+            "rightOperand": "admin"
+          }
+        ]
+      }
+    },
+    {
+      "type": "permission",
+      "original": {
+        "uid": "http://example.com/rule:Application\nrejected_permission_h0t2bju5_original",
+        "target": "http://example.com/asset:Application\nrejected",
+        "action": "execute"
+      },
+      "reconstructed": {
+        "uid": "http://example.com/rule:Application\nrejected_permission_h0t2bju5_reconstructed",
+        "target": "http://example.com/asset:Application\nrejected",
+        "action": "execute"
+      }
+    },
+    {
+      "type": "permission",
+      "original": {
+        "uid": "http://example.com/rule:Meeting\ncompleted_permission_lil571e4_original",
+        "target": "http://example.com/asset:Meeting\ncompleted",
+        "action": "execute",
+        "constraint": [
+          {
+            "leftOperand": "dateTime",
+            "operator": "lt",
+            "rightOperand": "2026-02-21"
+          },
+          {
+            "leftOperand": "dateTime",
+            "operator": "gt",
+            "rightOperand": "2025-04-04"
+          }
+        ]
+      },
+      "reconstructed": {
+        "uid": "http://example.com/rule:Meeting\ncompleted_permission_lil571e4_reconstructed",
+        "target": "http://example.com/asset:Meeting\ncompleted",
+        "action": "execute",
+        "constraint": [
+          {
+            "leftOperand": "dateTime",
+            "operator": "lt",
+            "rightOperand": "2026-02-21"
+          },
+          {
+            "leftOperand": "dateTime",
+            "operator": "gt",
+            "rightOperand": "2025-04-04"
+          }
+        ]
+      }
+    },
+    {
+      "type": "permission",
+      "original": {
+        "uid": "http://example.com/rule:Meeting\ncompleted_permission_xjq90a2b_original",
+        "target": "http://example.com/asset:Meeting\ncompleted",
+        "action": "read",
+        "constraint": [
+          {
+            "leftOperand": "role",
+            "operator": "eq",
+            "rightOperand": "admin"
+          }
+        ]
+      },
+      "reconstructed": {
+        "uid": "http://example.com/rule:Meeting\ncompleted_permission_xjq90a2b_reconstructed",
+        "target": "http://example.com/asset:Meeting\ncompleted",
+        "action": "read",
+        "constraint": [
+          {
+            "leftOperand": "role",
+            "operator": "eq",
+            "rightOperand": "admin"
+          }
+        ]
+      }
+    },
+    {
+      "type": "permission",
+      "original": {
+        "uid": "http://example.com/rule:Application\naccepted_permission_1c770qmo_original",
+        "target": "http://example.com/asset:Application\naccepted",
+        "action": "read",
+        "constraint": [
+          {
+            "leftOperand": "role",
+            "operator": "eq",
+            "rightOperand": "admin"
+          }
+        ]
+      },
+      "reconstructed": {
+        "uid": "http://example.com/rule:Application\naccepted_permission_1c770qmo_reconstructed",
+        "target": "http://example.com/asset:Application\naccepted",
+        "action": "read",
+        "constraint": [
+          {
+            "leftOperand": "role",
+            "operator": "eq",
+            "rightOperand": "admin"
+          }
+        ]
+      }
+    },
+    {
+      "type": "prohibition",
+      "original": {
+        "uid": "http://example.com/rule:Meeting\nday_prohibition_mxykwcdu_original",
+        "target": "http://example.com/asset:Meeting\nday",
+        "action": "modify",
+        "constraint": [
+          {
+            "leftOperand": "role",
+            "operator": "neq",
+            "rightOperand": "admin"
+          }
+        ]
+      },
+      "reconstructed": {
+        "uid": "http://example.com/rule:Meeting\nday_prohibition_mxykwcdu_reconstructed",
+        "target": "http://example.com/asset:Meeting\nday",
+        "action": "modify",
+        "constraint": [
+          {
+            "leftOperand": "role",
+            "operator": "neq",
+            "rightOperand": "admin"
+          }
+        ]
+      }
+    },
+    {
+      "type": "prohibition",
+      "original": {
+        "uid": "http://example.com/rule:Application\nrejected_prohibition_qen10h2g_original",
+        "target": "http://example.com/asset:Application\nrejected",
+        "action": "modify"
+      },
+      "reconstructed": {
+        "uid": "http://example.com/rule:Application\nrejected_prohibition_qen10h2g_reconstructed",
+        "target": "http://example.com/asset:Application\nrejected",
+        "action": "modify"
+      }
+    },
+    {
+      "type": "prohibition",
+      "original": {
+        "uid": "http://example.com/rule:Meeting\ncompleted_prohibition_rvkzsxuc_original",
+        "target": "http://example.com/asset:Meeting\ncompleted",
+        "action": "modify",
+        "constraint": [
+          {
+            "leftOperand": "role",
+            "operator": "neq",
+            "rightOperand": "admin"
+          }
+        ]
+      },
+      "reconstructed": {
+        "uid": "http://example.com/rule:Meeting\ncompleted_prohibition_rvkzsxuc_reconstructed",
+        "target": "http://example.com/asset:Meeting\ncompleted",
+        "action": "modify",
+        "constraint": [
+          {
+            "leftOperand": "role",
+            "operator": "neq",
+            "rightOperand": "admin"
+          }
+        ]
+      }
+    },
+    {
+      "type": "prohibition",
+      "original": {
+        "uid": "http://example.com/rule:Application\naccepted_prohibition_63gzhj1y_original",
+        "target": "http://example.com/asset:Application\naccepted",
+        "action": "modify",
+        "constraint": [
+          {
+            "leftOperand": "role",
+            "operator": "neq",
+            "rightOperand": "admin"
+          }
+        ]
+      },
+      "reconstructed": {
+        "uid": "http://example.com/rule:Application\naccepted_prohibition_63gzhj1y_reconstructed",
+        "target": "http://example.com/asset:Application\naccepted",
+        "action": "modify",
+        "constraint": [
+          {
+            "leftOperand": "role",
+            "operator": "neq",
+            "rightOperand": "admin"
+          }
+        ]
+      }
+    },
+    {
+      "type": "obligation",
+      "original": {
+        "uid": "http://example.com/rule:Meeting\nday_obligation_vm949r45_original",
+        "target": "http://example.com/asset:Meeting\nday",
+        "action": "log",
+        "constraint": [
+          {
+            "leftOperand": "event",
+            "operator": "eq",
+            "rightOperand": "execution_complete"
+          }
+        ]
+      },
+      "reconstructed": {
+        "uid": "http://example.com/rule:Meeting\nday_obligation_vm949r45_reconstructed",
+        "target": "http://example.com/asset:Meeting\nday",
+        "action": "log",
+        "constraint": [
+          {
+            "leftOperand": "event",
+            "operator": "eq",
+            "rightOperand": "execution_complete"
+          }
+        ]
+      }
+    },
+    {
+      "type": "obligation",
+      "original": {
+        "uid": "http://example.com/rule:Application\nrejected_obligation_cksa79x0_original",
+        "target": "http://example.com/asset:Application\nrejected",
+        "action": "log",
+        "constraint": [
+          {
+            "leftOperand": "event",
+            "operator": "eq",
+            "rightOperand": "execution_complete"
+          }
+        ]
+      },
+      "reconstructed": {
+        "uid": "http://example.com/rule:Application\nrejected_obligation_cksa79x0_reconstructed",
+        "target": "http://example.com/asset:Application\nrejected",
+        "action": "log",
+        "constraint": [
+          {
+            "leftOperand": "event",
+            "operator": "eq",
+            "rightOperand": "execution_complete"
+          }
+        ]
+      }
+    },
+    {
+      "type": "obligation",
+      "original": {
+        "uid": "http://example.com/rule:Meeting\ncompleted_obligation_e215onig_original",
+        "target": "http://example.com/asset:Meeting\ncompleted",
+        "action": "log",
+        "constraint": [
+          {
+            "leftOperand": "event",
+            "operator": "eq",
+            "rightOperand": "execution_complete"
+          }
+        ]
+      },
+      "reconstructed": {
+        "uid": "http://example.com/rule:Meeting\ncompleted_obligation_e215onig_reconstructed",
+        "target": "http://example.com/asset:Meeting\ncompleted",
+        "action": "log",
+        "constraint": [
+          {
+            "leftOperand": "event",
+            "operator": "eq",
+            "rightOperand": "execution_complete"
+          }
+        ]
+      }
+    },
+    {
+      "type": "obligation",
+      "original": {
+        "uid": "http://example.com/rule:Application\naccepted_obligation_of74ytov_original",
+        "target": "http://example.com/asset:Application\naccepted",
+        "action": "log",
+        "constraint": [
+          {
+            "leftOperand": "event",
+            "operator": "eq",
+            "rightOperand": "execution_complete"
+          }
+        ]
+      },
+      "reconstructed": {
+        "uid": "http://example.com/rule:Application\naccepted_obligation_of74ytov_reconstructed",
+        "target": "http://example.com/asset:Application\naccepted",
+        "action": "log",
+        "constraint": [
+          {
+            "leftOperand": "event",
+            "operator": "eq",
+            "rightOperand": "execution_complete"
+          }
+        ]
+      }
+    }
+  ],
+  "lost_rules": [],
+  "new_rules": [
+    {
+      "type": "permission",
+      "rule": {
+        "uid": "http://example.com/rule:Application\nsubmitted\nelectronically_permission_g7vrf6gk_reconstructed",
+        "target": "http://example.com/asset:Application\nsubmitted\nelectronically",
+        "action": "read",
+        "constraint": [
+          {
+            "leftOperand": "role",
+            "operator": "eq",
+            "rightOperand": "user"
+          }
+        ]
+      }
+    },
+    {
+      "type": "permission",
+      "rule": {
+        "uid": "http://example.com/rule:Application\nsubmitted\nelectronically_permission_094nx7u4_reconstructed",
+        "target": "http://example.com/asset:Application\nsubmitted\nelectronically",
+        "action": "execute",
+        "constraint": [
+          {
+            "leftOperand": "dateTime",
+            "operator": "lt",
+            "rightOperand": "2025-11-27"
+          }
+        ]
+      }
+    },
+    {
+      "type": "permission",
+      "rule": {
+        "uid": "http://example.com/rule:Degrees\nvalidity\nverification\nrequired_permission_e15cjs7b_reconstructed",
+        "target": "http://example.com/asset:Degrees\nvalidity\nverification\nrequired",
+        "action": "read"
+      }
+    },
+    {
+      "type": "permission",
+      "rule": {
+        "uid": "http://example.com/rule:Degrees\nvalidity\nverification\nrequired_permission_3q5mzunk_reconstructed",
+        "target": "http://example.com/asset:Degrees\nvalidity\nverification\nrequired",
+        "action": "execute",
+        "constraint": [
+          {
+            "leftOperand": "dateTime",
+            "operator": "lt",
+            "rightOperand": "2025-08-13"
+          },
+          {
+            "leftOperand": "dateTime",
+            "operator": "gt",
+            "rightOperand": "2025-04-04"
+          }
+        ]
+      }
+    },
+    {
+      "type": "permission",
+      "rule": {
+        "uid": "http://example.com/rule:Degrees\nvalidity\nverified_permission_7t576xyg_reconstructed",
+        "target": "http://example.com/asset:Degrees\nvalidity\nverified",
+        "action": "read"
+      }
+    },
+    {
+      "type": "permission",
+      "rule": {
+        "uid": "http://example.com/rule:Degrees\nvalidity\nverified_permission_w6xiygb5_reconstructed",
+        "target": "http://example.com/asset:Degrees\nvalidity\nverified",
+        "action": "execute",
+        "constraint": [
+          {
+            "leftOperand": "dateTime",
+            "operator": "gt",
+            "rightOperand": "2025-04-04"
+          },
+          {
+            "leftOperand": "dateTime",
+            "operator": "lt",
+            "rightOperand": "2025-06-18"
+          }
+        ]
+      }
+    },
+    {
+      "type": "prohibition",
+      "rule": {
+        "uid": "http://example.com/rule:Application\nsubmitted\nelectronically_prohibition_rwhth868_reconstructed",
+        "target": "http://example.com/asset:Application\nsubmitted\nelectronically",
+        "action": "modify",
+        "constraint": [
+          {
+            "leftOperand": "role",
+            "operator": "neq",
+            "rightOperand": "admin"
+          }
+        ]
+      }
+    },
+    {
+      "type": "prohibition",
+      "rule": {
+        "uid": "http://example.com/rule:Degrees\nvalidity\nverification\nrequired_prohibition_a608uz3l_reconstructed",
+        "target": "http://example.com/asset:Degrees\nvalidity\nverification\nrequired",
+        "action": "modify"
+      }
+    },
+    {
+      "type": "prohibition",
+      "rule": {
+        "uid": "http://example.com/rule:Degrees\nvalidity\nverified_prohibition_ew3gl4ny_reconstructed",
+        "target": "http://example.com/asset:Degrees\nvalidity\nverified",
+        "action": "modify",
+        "constraint": [
+          {
+            "leftOperand": "role",
+            "operator": "neq",
+            "rightOperand": "admin"
+          }
+        ]
+      }
+    },
+    {
+      "type": "obligation",
+      "rule": {
+        "uid": "http://example.com/rule:Application\nsubmitted\nelectronically_obligation_j2jpk4bh_reconstructed",
+        "target": "http://example.com/asset:Application\nsubmitted\nelectronically",
+        "action": "log"
+      }
+    },
+    {
+      "type": "obligation",
+      "rule": {
+        "uid": "http://example.com/rule:Degrees\nvalidity\nverification\nrequired_obligation_duwwh8tq_reconstructed",
+        "target": "http://example.com/asset:Degrees\nvalidity\nverification\nrequired",
+        "action": "log",
+        "constraint": [
+          {
+            "leftOperand": "event",
+            "operator": "eq",
+            "rightOperand": "execution_complete"
+          }
+        ]
+      }
+    },
+    {
+      "type": "obligation",
+      "rule": {
+        "uid": "http://example.com/rule:Degrees\nvalidity\nverified_obligation_ykrdfglg_reconstructed",
+        "target": "http://example.com/asset:Degrees\nvalidity\nverified",
+        "action": "log"
+      }
+    }
+  ],
+  "accuracy": 1.0
+}

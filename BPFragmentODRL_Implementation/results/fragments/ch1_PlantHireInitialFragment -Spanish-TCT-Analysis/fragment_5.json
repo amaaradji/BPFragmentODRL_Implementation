@@ -1,0 +1,11 @@
+{
+  "id": 4,
+  "activities": [
+    "Verificar disponibilidad del equipo"
+  ],
+  "gateways": [],
+  "entry_points": [
+    "Verificar disponibilidad del equipo"
+  ],
+  "exit_points": []
+}

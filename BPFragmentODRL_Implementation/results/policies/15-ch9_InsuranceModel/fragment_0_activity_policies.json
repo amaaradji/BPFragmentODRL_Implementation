@@ -1,0 +1,45 @@
+{
+  "New claim\n received": {
+    "@context": "http://www.w3.org/ns/odrl.jsonld",
+    "uid": "http://example.com/policy:New claim\n received_g2189r82",
+    "@type": "Set",
+    "permission": [
+      {
+        "uid": "http://example.com/rule:New claim\n received_permission_z9th9zh2",
+        "target": "http://example.com/asset:New claim\n received",
+        "action": "read"
+      },
+      {
+        "uid": "http://example.com/rule:New claim\n received_permission_811z7v5m",
+        "target": "http://example.com/asset:New claim\n received",
+        "action": "execute",
+        "constraint": [
+          {
+            "leftOperand": "dateTime",
+            "operator": "gt",
+            "rightOperand": "2025-04-04"
+          },
+          {
+            "leftOperand": "dateTime",
+            "operator": "lt",
+            "rightOperand": "2025-09-15"
+          }
+        ]
+      }
+    ],
+    "prohibition": [
+      {
+        "uid": "http://example.com/rule:New claim\n received_prohibition_xllz1f7b",
+        "target": "http://example.com/asset:New claim\n received",
+        "action": "modify"
+      }
+    ],
+    "obligation": [
+      {
+        "uid": "http://example.com/rule:New claim\n received_obligation_g4koq23v",
+        "target": "http://example.com/asset:New claim\n received",
+        "action": "log"
+      }
+    ]
+  }
+}

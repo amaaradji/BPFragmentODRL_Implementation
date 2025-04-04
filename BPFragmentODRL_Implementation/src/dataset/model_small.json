@@ -1,0 +1,11 @@
+{
+    "activities": [
+      { "name": "A", "type": "task", "start": true },
+      { "name": "B", "type": "task" }
+    ],
+    "gateways": [],
+    "flows": [
+      { "from": "A", "to": "B", "type": "sequence" }
+    ]
+  }
+  

@@ -1,0 +1,23 @@
+{
+    "activities": [
+      { "name": "A", "type": "task", "start": true },
+      { "name": "B", "type": "task" },
+      { "name": "C", "type": "task" },
+      { "name": "D", "type": "task" },
+      { "name": "E", "type": "task" }
+    ],
+    "gateways": [
+      { "name": "G1", "type": "AND", "description": "parallel" },
+      { "name": "G2", "type": "XOR", "description": "branch" }
+    ],
+    "flows": [
+      { "from": "A", "to": "G1", "type": "sequence" },
+      { "from": "G1", "to": "B", "type": "sequence", "gateway": "G1" },
+      { "from": "G1", "to": "C", "type": "sequence", "gateway": "G1" },
+      { "from": "B", "to": "G2", "type": "sequence" },
+      { "from": "C", "to": "G2", "type": "message" },
+      { "from": "G2", "to": "D", "type": "sequence", "gateway": "G2" },
+      { "from": "G2", "to": "E", "type": "sequence", "gateway": "G2" }
+    ]
+  }
+  

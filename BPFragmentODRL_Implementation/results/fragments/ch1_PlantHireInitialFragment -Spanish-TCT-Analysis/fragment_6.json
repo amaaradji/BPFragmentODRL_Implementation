@@ -1,0 +1,11 @@
+{
+  "id": 5,
+  "activities": [
+    "Crear Pedido"
+  ],
+  "gateways": [],
+  "entry_points": [
+    "Crear Pedido"
+  ],
+  "exit_points": []
+}

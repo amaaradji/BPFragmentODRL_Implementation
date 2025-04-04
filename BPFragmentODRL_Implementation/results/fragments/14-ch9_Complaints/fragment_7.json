@@ -1,0 +1,11 @@
+{
+  "id": 6,
+  "activities": [
+    "Send automatic reply\nto customer"
+  ],
+  "gateways": [],
+  "entry_points": [
+    "Send automatic reply\nto customer"
+  ],
+  "exit_points": []
+}

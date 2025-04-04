@@ -1,0 +1,42 @@
+{
+  "Application\naborted": {
+    "@context": "http://www.w3.org/ns/odrl.jsonld",
+    "uid": "http://example.com/policy:Application\naborted_p8q0hvw5",
+    "@type": "Set",
+    "permission": [
+      {
+        "uid": "http://example.com/rule:Application\naborted_permission_dafrlygx",
+        "target": "http://example.com/asset:Application\naborted",
+        "action": "read",
+        "constraint": [
+          {
+            "leftOperand": "role",
+            "operator": "eq",
+            "rightOperand": "user"
+          }
+        ]
+      }
+    ],
+    "prohibition": [
+      {
+        "uid": "http://example.com/rule:Application\naborted_prohibition_2z2rmxnu",
+        "target": "http://example.com/asset:Application\naborted",
+        "action": "modify",
+        "constraint": [
+          {
+            "leftOperand": "role",
+            "operator": "neq",
+            "rightOperand": "admin"
+          }
+        ]
+      }
+    ],
+    "obligation": [
+      {
+        "uid": "http://example.com/rule:Application\naborted_obligation_cxrn6s51",
+        "target": "http://example.com/asset:Application\naborted",
+        "action": "log"
+      }
+    ]
+  }
+}

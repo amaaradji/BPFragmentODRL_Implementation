@@ -1,0 +1,13 @@
+{
+  "intra_fragment": {
+    "total": 1,
+    "by_type": {
+      "permission_prohibition": 1
+    }
+  },
+  "inter_fragment": {
+    "total": 0,
+    "by_type": {}
+  },
+  "total_conflicts": 1
+}

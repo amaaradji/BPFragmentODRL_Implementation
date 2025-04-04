@@ -1,0 +1,131 @@
+{
+  "activities": [
+    {
+      "id": "sid-7303CAD1-2935-4E83-A338-9F6021051F2E",
+      "name": "New claim\n received",
+      "type": "event",
+      "start": true
+    },
+    {
+      "id": "sid-9D2DAA9A-FA0B-4EB0-8E7E-958FB81FCB2B",
+      "name": "Claim\nclosed",
+      "type": "event",
+      "end": true
+    },
+    {
+      "id": "sid-3284020E-8BF9-4FA0-9D48-3A6DADE8529A",
+      "name": "Case\nclosed",
+      "type": "event",
+      "end": true
+    },
+    {
+      "id": "sid-7C220904-0C28-413E-9749-AE73660FC03C",
+      "name": "Determine likelihood of the claim",
+      "type": "task"
+    },
+    {
+      "id": "sid-6D0E2778-0628-474E-B069-A671899C51DE",
+      "name": "Assess\nclaim",
+      "type": "task"
+    },
+    {
+      "id": "sid-D989644E-017D-443E-8DE6-128FA5D3CEFF",
+      "name": "Initiate payment",
+      "type": "task"
+    },
+    {
+      "id": "sid-1B1B1009-6DDC-45BF-9D09-C7C16C3E354E",
+      "name": "Advise claimant",
+      "type": "task"
+    }
+  ],
+  "gateways": [
+    {
+      "id": "sid-802CEA55-9C5D-4991-AAE0-AEB9286DB3BE",
+      "name": "XOR_sid-802CEA55-9C5D-4991-AAE0-AEB9286DB3BE",
+      "type": "XOR"
+    },
+    {
+      "id": "sid-EDA3C436-F50A-498C-A582-7C99930D00F8",
+      "name": "OR_sid-EDA3C436-F50A-498C-A582-7C99930D00F8",
+      "type": "OR"
+    },
+    {
+      "id": "sid-8554EF46-202F-48E7-9248-6C461DBDBC40",
+      "name": "OR_sid-8554EF46-202F-48E7-9248-6C461DBDBC40",
+      "type": "OR"
+    }
+  ],
+  "flows": [
+    {
+      "id": "sid-1E5C397B-0DF2-42F8-9A17-193CDF67A1E7",
+      "from": "sid-7C220904-0C28-413E-9749-AE73660FC03C",
+      "to": "sid-802CEA55-9C5D-4991-AAE0-AEB9286DB3BE",
+      "type": "sequence",
+      "gateway": "XOR_sid-802CEA55-9C5D-4991-AAE0-AEB9286DB3BE"
+    },
+    {
+      "id": "sid-CB78551D-0D96-4320-8292-0065968265A1",
+      "from": "sid-8554EF46-202F-48E7-9248-6C461DBDBC40",
+      "to": "sid-9D2DAA9A-FA0B-4EB0-8E7E-958FB81FCB2B",
+      "type": "sequence",
+      "gateway": "OR_sid-8554EF46-202F-48E7-9248-6C461DBDBC40"
+    },
+    {
+      "id": "sid-ED13B65D-149F-415C-9514-52E90C0C068E",
+      "from": "sid-7303CAD1-2935-4E83-A338-9F6021051F2E",
+      "to": "sid-7C220904-0C28-413E-9749-AE73660FC03C",
+      "type": "sequence"
+    },
+    {
+      "id": "sid-50DBD794-8CB6-4510-80BA-8A0C1FB42B26",
+      "from": "sid-6D0E2778-0628-474E-B069-A671899C51DE",
+      "to": "sid-EDA3C436-F50A-498C-A582-7C99930D00F8",
+      "type": "sequence",
+      "gateway": "OR_sid-EDA3C436-F50A-498C-A582-7C99930D00F8"
+    },
+    {
+      "id": "sid-972AC0E7-B691-4A94-82DE-EC4213CCD011",
+      "from": "sid-D989644E-017D-443E-8DE6-128FA5D3CEFF",
+      "to": "sid-8554EF46-202F-48E7-9248-6C461DBDBC40",
+      "type": "sequence",
+      "gateway": "OR_sid-8554EF46-202F-48E7-9248-6C461DBDBC40"
+    },
+    {
+      "id": "sid-DF49C48A-BF54-45FE-A293-C580FE911AEF",
+      "from": "sid-1B1B1009-6DDC-45BF-9D09-C7C16C3E354E",
+      "to": "sid-8554EF46-202F-48E7-9248-6C461DBDBC40",
+      "type": "sequence",
+      "gateway": "OR_sid-8554EF46-202F-48E7-9248-6C461DBDBC40"
+    },
+    {
+      "id": "sid-C6FE7351-EA19-4BA3-8102-AF6F6BEEA9BC",
+      "from": "sid-802CEA55-9C5D-4991-AAE0-AEB9286DB3BE",
+      "to": "sid-6D0E2778-0628-474E-B069-A671899C51DE",
+      "type": "sequence",
+      "gateway": "XOR_sid-802CEA55-9C5D-4991-AAE0-AEB9286DB3BE"
+    },
+    {
+      "id": "sid-78BFD4E8-5A29-4729-94EB-E4218F0CE32C",
+      "from": "sid-EDA3C436-F50A-498C-A582-7C99930D00F8",
+      "to": "sid-1B1B1009-6DDC-45BF-9D09-C7C16C3E354E",
+      "type": "sequence",
+      "gateway": "OR_sid-EDA3C436-F50A-498C-A582-7C99930D00F8"
+    },
+    {
+      "id": "sid-88BFAB52-D695-445E-A02B-83EAB7AB5DF9",
+      "from": "sid-EDA3C436-F50A-498C-A582-7C99930D00F8",
+      "to": "sid-D989644E-017D-443E-8DE6-128FA5D3CEFF",
+      "type": "sequence",
+      "gateway": "OR_sid-EDA3C436-F50A-498C-A582-7C99930D00F8"
+    },
+    {
+      "id": "sid-E92FA44C-ADC9-495D-88F8-0E32E8B0912A",
+      "from": "sid-802CEA55-9C5D-4991-AAE0-AEB9286DB3BE",
+      "to": "sid-3284020E-8BF9-4FA0-9D48-3A6DADE8529A",
+      "type": "sequence",
+      "gateway": "XOR_sid-802CEA55-9C5D-4991-AAE0-AEB9286DB3BE"
+    }
+  ],
+  "source_file": "15-ch9_InsuranceModel.bpmn"
+}

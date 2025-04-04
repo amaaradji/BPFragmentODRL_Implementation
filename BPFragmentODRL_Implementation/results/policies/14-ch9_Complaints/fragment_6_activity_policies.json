@@ -1,0 +1,54 @@
+{
+  "Send automatic reply\nto customer": {
+    "@context": "http://www.w3.org/ns/odrl.jsonld",
+    "uid": "http://example.com/policy:Send automatic reply\nto customer_ran6alrx",
+    "@type": "Set",
+    "permission": [
+      {
+        "uid": "http://example.com/rule:Send automatic reply\nto customer_permission_535rmni1",
+        "target": "http://example.com/asset:Send automatic reply\nto customer",
+        "action": "execute",
+        "constraint": [
+          {
+            "leftOperand": "dateTime",
+            "operator": "lt",
+            "rightOperand": "2025-05-04"
+          }
+        ]
+      },
+      {
+        "uid": "http://example.com/rule:Send automatic reply\nto customer_permission_ut3iq0hc",
+        "target": "http://example.com/asset:Send automatic reply\nto customer",
+        "action": "read",
+        "constraint": [
+          {
+            "leftOperand": "role",
+            "operator": "eq",
+            "rightOperand": "admin"
+          }
+        ]
+      }
+    ],
+    "prohibition": [
+      {
+        "uid": "http://example.com/rule:Send automatic reply\nto customer_prohibition_lejxu4pj",
+        "target": "http://example.com/asset:Send automatic reply\nto customer",
+        "action": "modify"
+      }
+    ],
+    "obligation": [
+      {
+        "uid": "http://example.com/rule:Send automatic reply\nto customer_obligation_k72c5ceh",
+        "target": "http://example.com/asset:Send automatic reply\nto customer",
+        "action": "log",
+        "constraint": [
+          {
+            "leftOperand": "event",
+            "operator": "eq",
+            "rightOperand": "execution_complete"
+          }
+        ]
+      }
+    ]
+  }
+}

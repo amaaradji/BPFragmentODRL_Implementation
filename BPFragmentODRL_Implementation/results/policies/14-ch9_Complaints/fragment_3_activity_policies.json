@@ -1,0 +1,40 @@
+{
+  "Discuss\nsolution": {
+    "@context": "http://www.w3.org/ns/odrl.jsonld",
+    "uid": "http://example.com/policy:Discuss\nsolution_8iduynqx",
+    "@type": "Set",
+    "permission": [
+      {
+        "uid": "http://example.com/rule:Discuss\nsolution_permission_4imno856",
+        "target": "http://example.com/asset:Discuss\nsolution",
+        "action": "read"
+      },
+      {
+        "uid": "http://example.com/rule:Discuss\nsolution_permission_l4umvrf9",
+        "target": "http://example.com/asset:Discuss\nsolution",
+        "action": "execute",
+        "constraint": [
+          {
+            "leftOperand": "dateTime",
+            "operator": "gt",
+            "rightOperand": "2025-04-04"
+          }
+        ]
+      }
+    ],
+    "prohibition": [
+      {
+        "uid": "http://example.com/rule:Discuss\nsolution_prohibition_ibb1h94v",
+        "target": "http://example.com/asset:Discuss\nsolution",
+        "action": "modify"
+      }
+    ],
+    "obligation": [
+      {
+        "uid": "http://example.com/rule:Discuss\nsolution_obligation_hlitw22s",
+        "target": "http://example.com/asset:Discuss\nsolution",
+        "action": "log"
+      }
+    ]
+  }
+}

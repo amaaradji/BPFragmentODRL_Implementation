@@ -1,0 +1,11 @@
+model_name,activities,fragments,policy_generation_time,permissions,prohibitions,obligations,intra_fragment_conflicts,inter_fragment_conflicts,reconstruction_accuracy,policy_size_kb
+ch1_PlantHireInitialFragment -Spanish-TCT-Analysis.bpmn,8,8,0.0010051727294921875,12,7,7,0,0,1.0,7.37890625
+ch1_PlantHireInitialFragment.bpmn,8,8,0.0,10,6,6,1,0,1.0,5.28515625
+1-ch9_PurchaseOrder5.bpmn,2,2,0.0,1,1,1,0,0,1.0,0.86328125
+10-ch9_loan5.bpmn,4,4,0.0,5,3,3,0,0,1.0,3.01953125
+11-ch9_loan8.bpmn,6,5,0.0,5,4,4,0,0,1.0,3.9599609375
+12-ch9_Prescription-Correct-One.bpmn,2,2,0.0,2,1,1,0,0,1.0,1.103515625
+13-ch9_ServiceSalesSol.bpmn,23,12,0.0,10,8,8,0,0,1.0,7.1435546875
+14-ch9_Complaints.bpmn,10,10,0.0,12,8,8,0,0,1.0,7.2197265625
+15-ch9_InsuranceModel.bpmn,7,7,0.0010056495666503906,10,6,6,1,0,1.0,5.580078125
+2-ch9_Admission.bpmn,12,10,0.0005171298980712891,12,7,7,0,0,1.0,7.7333984375

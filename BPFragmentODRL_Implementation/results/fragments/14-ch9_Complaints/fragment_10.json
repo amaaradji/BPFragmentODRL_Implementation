@@ -1,0 +1,11 @@
+{
+  "id": 9,
+  "activities": [
+    "Go to court"
+  ],
+  "gateways": [],
+  "entry_points": [
+    "Go to court"
+  ],
+  "exit_points": []
+}

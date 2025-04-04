@@ -1,0 +1,11 @@
+{
+  "id": 5,
+  "activities": [
+    "Create PO"
+  ],
+  "gateways": [],
+  "entry_points": [
+    "Create PO"
+  ],
+  "exit_points": []
+}

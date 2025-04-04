@@ -1,0 +1,49 @@
+{
+  "Complaint\nnot addressed": {
+    "@context": "http://www.w3.org/ns/odrl.jsonld",
+    "uid": "http://example.com/policy:Complaint\nnot addressed_j7tdfuj5",
+    "@type": "Set",
+    "permission": [
+      {
+        "uid": "http://example.com/rule:Complaint\nnot addressed_permission_lms4f0kq",
+        "target": "http://example.com/asset:Complaint\nnot addressed",
+        "action": "read",
+        "constraint": [
+          {
+            "leftOperand": "role",
+            "operator": "eq",
+            "rightOperand": "admin"
+          }
+        ]
+      }
+    ],
+    "prohibition": [
+      {
+        "uid": "http://example.com/rule:Complaint\nnot addressed_prohibition_kypjcxnh",
+        "target": "http://example.com/asset:Complaint\nnot addressed",
+        "action": "modify",
+        "constraint": [
+          {
+            "leftOperand": "role",
+            "operator": "neq",
+            "rightOperand": "admin"
+          }
+        ]
+      }
+    ],
+    "obligation": [
+      {
+        "uid": "http://example.com/rule:Complaint\nnot addressed_obligation_i9izrwst",
+        "target": "http://example.com/asset:Complaint\nnot addressed",
+        "action": "log",
+        "constraint": [
+          {
+            "leftOperand": "event",
+            "operator": "eq",
+            "rightOperand": "execution_complete"
+          }
+        ]
+      }
+    ]
+  }
+}
