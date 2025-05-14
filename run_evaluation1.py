@@ -1,3 +1,9 @@
+"""
+run_evaluation.py
+
+Script to run the complete evaluation pipeline for the BPFragmentODRL system.
+"""
+
 import os
 import sys
 import argparse
@@ -14,7 +20,7 @@ logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s',
     handlers=[
-        logging.FileHandler("evaluation.log", mode='w'), # Overwrite log file each run
+        logging.FileHandler("evaluation.log"),
         logging.StreamHandler()
     ]
 )
@@ -24,7 +30,7 @@ def main():
     """Main function to run the evaluation pipeline."""
     parser = argparse.ArgumentParser(description='BPFragmentODRL Evaluation Pipeline')
     parser.add_argument("--policy_generator_type", type=str, choices=["rule_based", "llm_based"],
-      default="rule_based",
+      default="rule_based", # Or "llm_based" if you want it as default
       help="Type of policy generator to use: rule_based or llm_based.")
     parser.add_argument('--dataset', type=str, default='datasets/FBPM/FBPM2-ProcessModels',
                         help='Path to the dataset directory')
@@ -33,7 +39,7 @@ def main():
     parser.add_argument('--strategy', type=str, default='gateway',
                         choices=['gateway', 'activity', 'connected', 'hierarchical'],
                         help='Fragmentation strategy')
-    parser.add_argument('--max_models', type=int, default=1, # Reduced for quick testing
+    parser.add_argument('--max_models', type=int, default=10,
                         help='Maximum number of models to process (0 for all)')
     
     args = parser.parse_args()
@@ -42,24 +48,19 @@ def main():
     start_time = datetime.now()
     logger.info(f"Starting evaluation at {start_time}")
     logger.info(f"Configuration: dataset={args.dataset}, output={args.output}, "
-                f"strategy={args.strategy}, max_models={args.max_models}, "
-                f"policy_generator_type={args.policy_generator_type}")
+                f"strategy={args.strategy}, max_models={args.max_models}")
     
     # Ensure the dataset directory exists
-    dataset_full_path = os.path.abspath(args.dataset)
-    if not os.path.exists(dataset_full_path):
-        logger.error(f"Dataset directory not found: {dataset_full_path}")
-        print(f"\nERROR: Dataset directory not found: {dataset_full_path}")
+    if not os.path.exists(args.dataset):
+        logger.error(f"Dataset directory not found: {args.dataset}")
+        print(f"\nERROR: Dataset directory not found: {args.dataset}")
         print("\nUSER ACTION REQUIRED")
         print("Please download the BPMN XML files manually from the provided dataset link and place them in the folder:")
-        print(f"{args.dataset}/") # Keep relative path for user message
+        print(f"/{args.dataset}/")
         return
     
-    # Create the evaluation pipeline, passing the policy_generator_type
-    pipeline = EvaluationPipeline(dataset_full_path, 
-                                  os.path.abspath(args.output), 
-                                  args.strategy, 
-                                  args.policy_generator_type) # Pass type here
+    # Create the evaluation pipeline
+    pipeline = EvaluationPipeline(args.dataset, args.output, args.strategy)
     
     try:
         # Run the evaluation
@@ -96,4 +97,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
