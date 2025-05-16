@@ -34,9 +34,10 @@ ENV/
 datasets/*/
 datasets/*
 # Results (optional)
-results/*/
+results/*
 results*/*
 bpmaievaluationfull/*
+bpmaievaluationfull/*/
 bpmaievaluationfull_resultsfiles/*
 bpmaisample/*
 bpmaisample_resultsfiles/*
