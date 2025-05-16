@@ -32,5 +32,15 @@ ENV/
 
 # Dataset files 
 datasets/*/
+datasets/*
 # Results (optional)
 results/*/
+results*/*
+bpmaievaluationfull/*
+bpmaievaluationfull_resultsfiles/*
+bpmaisample/*
+bpmaisample_resultsfiles/*
+casestudyllm/*
+casestudyrule/*
+FBPM/*
+_*

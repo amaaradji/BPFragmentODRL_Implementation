@@ -16,7 +16,7 @@ from collections import defaultdict
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
-class EnhancedPolicyGenerator:
+class EnhancedPolicyGeneratorLLM:
     """
     Generates ODRL-based policies for BPMN fragments, with an option to use an LLM.
     """

@@ -14,13 +14,13 @@ from tqdm import tqdm
 from datetime import datetime
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 # Import all modules
 from bpmn_parser import BPMNParser
 from enhanced_fragmenter import EnhancedFragmenter
-# We will conditionally import the policy generators later
-# from enhanced_policy_generator import EnhancedPolicyGenerator
-# from enhanced_policy_generator_llm import EnhancedPolicyGenerator as EnhancedPolicyGeneratorLLM
+# Policy generators are imported conditionally within _process_model
 from policy_consistency_checker import PolicyConsistencyChecker
 from policy_reconstructor import PolicyReconstructor
 
@@ -56,14 +56,15 @@ class EvaluationPipeline:
         self.policies_dir = os.path.join(output_path, 'policies')
         self.conflicts_dir = os.path.join(output_path, 'conflicts')
         self.reconstruction_dir = os.path.join(output_path, 'reconstruction')
+        self.visualizations_path = os.path.join(output_path, 'visualizations') 
         
         os.makedirs(self.parsed_models_dir, exist_ok=True)
         os.makedirs(self.fragments_dir, exist_ok=True)
         os.makedirs(self.policies_dir, exist_ok=True)
         os.makedirs(self.conflicts_dir, exist_ok=True)
         os.makedirs(self.reconstruction_dir, exist_ok=True)
+        os.makedirs(self.visualizations_path, exist_ok=True) 
         
-        # Initialize results container
         self.results = {
             'models': [],
             'summary': {
@@ -95,19 +96,22 @@ class EvaluationPipeline:
                 if file.endswith('.bpmn') or file.endswith('.xml'):
                     bpmn_files.append(os.path.join(root, file))
         
-        if max_models > 0 and max_models < len(bpmn_files):
+        if max_models > 0 and len(bpmn_files) > max_models:
             bpmn_files = bpmn_files[:max_models]
         
-        logger.info(f"Found {len(bpmn_files)} BPMN models in dataset")
+        logger.info(f"Found {len(bpmn_files)} BPMN models in dataset to process.")
         self.results['summary']['total_models'] = len(bpmn_files)
         
         for bpmn_file in tqdm(bpmn_files, desc="Evaluating models"):
             try:
                 model_result = self._process_model(bpmn_file)
                 self.results['models'].append(model_result)
-                self.results['summary']['successful_models'] += 1
+                if model_result['status'] == 'success':
+                    self.results['summary']['successful_models'] += 1
+                else:
+                    self.results['summary']['failed_models'] += 1
             except Exception as e:
-                logger.error(f"Error processing model {bpmn_file}: {str(e)}", exc_info=True)
+                logger.error(f"Critical error processing model {bpmn_file}: {str(e)}", exc_info=True)
                 self.results['summary']['failed_models'] += 1
                 self.results['models'].append({
                     'model_name': os.path.basename(bpmn_file),
@@ -134,7 +138,7 @@ class EvaluationPipeline:
         
         start_time = time.time()
         parser = BPMNParser()
-        bp_model_data = parser.parse_file(bpmn_file) # Renamed to bp_model_data for clarity
+        bp_model_data = parser.parse_file(bpmn_file)
         parsing_time = time.time() - start_time
         
         parsed_model_path = os.path.join(self.parsed_models_dir, f"{os.path.splitext(model_name)[0]}.json")
@@ -161,35 +165,28 @@ class EvaluationPipeline:
         model_result['metrics']['fragmentation_time'] = fragmentation_time
         model_result['metrics']['fragmentation_strategy'] = self.fragmentation_strategy
         
-        # Step 3: Generate policies (Conditional Instantiation)
         start_time = time.time()
         policy_generator = None
-        use_llm_for_generation = False
+        llm_generator_imported_successfully = False
 
         if self.policy_generator_type == "llm_based":
             try:
-                from enhanced_policy_generator_llm import EnhancedPolicyGenerator as PolicyGeneratorLLM
-                # Pass bp_model_data as model_data and the strategy
-                policy_generator = PolicyGeneratorLLM(model_data=bp_model_data, fragmentation_strategy=self.fragmentation_strategy)
-                use_llm_for_generation = True # Flag to pass to generate_policies if needed by LLM version
+                from enhanced_policy_generator_llm import EnhancedPolicyGeneratorLLM
+                policy_generator = EnhancedPolicyGeneratorLLM(model_data=bp_model_data, fragmentation_strategy=self.fragmentation_strategy)
+                llm_generator_imported_successfully = True 
                 logger.info(f"Using LLM-based policy generator for {model_name}")
             except ImportError as e:
-                logger.error(f"Could not import LLM policy generator: {e}. Falling back to rule-based for {model_name}.")
-                from enhanced_policy_generator import EnhancedPolicyGenerator as PolicyGeneratorRuleBased
-                policy_generator = PolicyGeneratorRuleBased(bp_model_data, fragments, fragment_dependencies)
-        else: # rule_based
-            from enhanced_policy_generator import EnhancedPolicyGenerator as PolicyGeneratorRuleBased
-            policy_generator = PolicyGeneratorRuleBased(bp_model_data, fragments, fragment_dependencies)
+                logger.error(f"Could not import LLM policy generator (EnhancedPolicyGeneratorLLM): {e}. Falling back to rule-based for {model_name}.")
+                from enhanced_policy_generator import EnhancedPolicyGenerator
+                policy_generator = EnhancedPolicyGenerator(bp_model_data, fragments, fragment_dependencies)
+        else: 
+            from enhanced_policy_generator import EnhancedPolicyGenerator
+            policy_generator = EnhancedPolicyGenerator(bp_model_data, fragments, fragment_dependencies)
             logger.info(f"Using rule-based policy generator for {model_name}")
 
-        # The generate_policies method signature might differ or take flags.
-        # The LLM version I provided has generate_policies(self, fragments_data, use_llm=True)
-        # The original rule-based one has generate_policies(self, use_templates=True, policy_density=0.7)
-        if self.policy_generator_type == "llm_based" and use_llm_for_generation:
-             # Assuming fragments is the fragments_data the LLM generator expects
+        if self.policy_generator_type == "llm_based" and llm_generator_imported_successfully:
             activity_policies, dependency_policies = policy_generator.generate_policies(fragments, fragment_dependencies, use_llm=True)
         else:
-            # Rule-based generator call (adjust params if your original differs)
             activity_policies, dependency_policies = policy_generator.generate_policies(use_templates=True, policy_density=0.7)
         
         policy_generation_time = time.time() - start_time
@@ -210,7 +207,6 @@ class EvaluationPipeline:
         policy_size = self._calculate_policy_size(activity_policies, dependency_policies)
         model_result['metrics']['policy_size_kb'] = policy_size
         
-        # Step 4: Check policy consistency
         start_time = time.time()
         checker = PolicyConsistencyChecker(activity_policies, dependency_policies, fragments, fragment_dependencies)
         intra_conflicts = checker.check_intra_fragment_consistency()
@@ -228,10 +224,8 @@ class EvaluationPipeline:
         model_result['metrics']['inter_fragment_conflicts'] = conflict_metrics['inter_fragment']['total']
         model_result['metrics']['total_conflicts'] = conflict_metrics['total_conflicts']
         
-        # Step 5: Create a synthetic original BP-level policy for comparison
         original_bp_policy = self._create_synthetic_bp_policy(bp_model_data, activity_policies)
         
-        # Step 6: Reconstruct the policy
         start_time = time.time()
         reconstructor = PolicyReconstructor(activity_policies, dependency_policies, original_bp_policy, fragments)
         reconstructed_policy = reconstructor.reconstruct_policy()
@@ -239,7 +233,7 @@ class EvaluationPipeline:
         
         reconstruction_metrics = reconstructor.get_reconstruction_metrics()
         
-        reconstruction_dir_path = os.path.join(self.reconstruction_dir, os.path.splitext(model_name)[0]) # Renamed variable
+        reconstruction_dir_path = os.path.join(self.reconstruction_dir, os.path.splitext(model_name)[0])
         os.makedirs(reconstruction_dir_path, exist_ok=True)
         reconstructor.save_reconstruction(reconstruction_dir_path)
         
@@ -254,36 +248,24 @@ class EvaluationPipeline:
         return model_result
 
     def _create_synthetic_bp_policy(self, bp_model_data, activity_policies):
-        """
-        Create a synthetic original BP-level policy for comparison.
-        This is a placeholder and should be adapted based on actual policy structure.
-        """
-        # For simplicity, let's assume the synthetic policy is a collection of all activity policies
-        # In a real scenario, this would be more complex or loaded from an actual source
         synthetic_policy = {
             "permissions": [],
             "prohibitions": [],
             "obligations": []
         }
-        for policy_list in activity_policies.values():
-            for policy_type, policies in policy_list.items():
+        for act_id, policy_types_for_act in activity_policies.items():
+            for policy_type, rules_list in policy_types_for_act.items():
                 if policy_type in synthetic_policy:
-                    synthetic_policy[policy_type].extend(policies)
+                    synthetic_policy[policy_type].extend(rules_list)
         return synthetic_policy
 
     def _calculate_policy_size(self, activity_policies, dependency_policies):
-        """
-        Calculate the total size of generated policies in KB.
-        """
         total_size_bytes = 0
         total_size_bytes += sys.getsizeof(json.dumps(activity_policies))
         total_size_bytes += sys.getsizeof(json.dumps(dependency_policies))
-        return total_size_bytes / 1024 # Convert to KB
+        return total_size_bytes / 1024
 
     def _calculate_summary(self):
-        """
-        Calculate summary statistics from the evaluation results.
-        """
         if not self.results['models']:
             return
         
@@ -304,15 +286,11 @@ class EvaluationPipeline:
         self.results['summary']['avg_policy_size_kb'] = df['policy_size_kb'].mean()
 
     def _save_results(self):
-        """
-        Save the evaluation results to JSON and CSV files.
-        """
         results_json_path = os.path.join(self.output_path, 'evaluation_results.json')
         with open(results_json_path, 'w') as f:
             json.dump(self.results, f, indent=2)
         logger.info(f"Detailed results saved to {results_json_path}")
         
-        # Create a flat CSV for easier analysis
         if self.results['models']:
             model_metrics_list = []
             for res in self.results['models']:
@@ -323,168 +301,197 @@ class EvaluationPipeline:
                     model_metrics_list.append(metrics)
                 else:
                     model_metrics_list.append({
-                        'model_name': res['model_name'],
-                        'status': res['status'],
-                        'error': res.get('error', '')
+                        'model_name': res['model_name'], 
+                        'status': res['status'], 
+                        'error': res.get('error', 'Unknown error')
                     })
             
-            df_results = pd.DataFrame(model_metrics_list)
-            results_csv_path = os.path.join(self.output_path, 'results.csv')
-            df_results.to_csv(results_csv_path, index=False)
-            logger.info(f"Summary results saved to {results_csv_path}")
+            if model_metrics_list: 
+                df = pd.DataFrame(model_metrics_list)
+                results_csv_path = os.path.join(self.output_path, 'results.csv')
+                df.to_csv(results_csv_path, index=False)
+                logger.info(f"Summary results saved to {results_csv_path}")
+            else:
+                logger.warning("No data to save to CSV.")
+        else:
+            logger.warning("No models processed, skipping CSV summary.")
 
     def generate_visualizations(self):
-        """
-        Generate visualizations from the evaluation results.
-        Requires matplotlib to be installed.
-        """
-        try:
-            import matplotlib.pyplot as plt
-            import seaborn as sns
-        except ImportError:
-            logger.warning("Matplotlib or Seaborn not installed. Skipping visualization generation.")
-            return
-
         if not self.results['models'] or self.results['summary']['successful_models'] == 0:
             logger.warning("No successful model results to visualize.")
             return
 
-        df = pd.DataFrame([res['metrics'] for res in self.results['models'] if res['status'] == 'success'])
-        if df.empty:
-            logger.warning("DataFrame for visualization is empty.")
+        df_list = []
+        for res in self.results['models']:
+            if res['status'] == 'success':
+                metrics = res['metrics'].copy()
+                metrics['model_name'] = res['model_name'] 
+                df_list.append(metrics)
+        
+        if not df_list:
+            logger.warning("No successful model metrics to create DataFrame for visualization.")
             return
+            
+        df = pd.DataFrame(df_list)
 
-        viz_dir = os.path.join(self.output_path, 'visualizations')
-        os.makedirs(viz_dir, exist_ok=True)
+        os.makedirs(self.visualizations_path, exist_ok=True)
 
-        # Plot 1: Activities vs. Rules
-        plt.figure(figsize=(10, 6))
-        df['total_rules'] = df['permissions'] + df['prohibitions'] + df['obligations']
-        sns.scatterplot(data=df, x='activities', y='total_rules', hue='fragmentation_strategy')
-        plt.title('Activities vs. Total Generated Rules')
-        plt.xlabel('Number of Activities')
-        plt.ylabel('Total Generated Rules')
-        plt.grid(True)
-        plt.savefig(os.path.join(viz_dir, 'activities_vs_rules.png'))
-        plt.close()
-
-        # Plot 2: Fragments vs. Conflicts
-        plt.figure(figsize=(10, 6))
-        df['total_conflicts'] = df['intra_fragment_conflicts'] + df['inter_fragment_conflicts']
-        sns.scatterplot(data=df, x='fragments', y='total_conflicts', hue='fragmentation_strategy')
-        plt.title('Fragments vs. Total Conflicts')
-        plt.xlabel('Number of Fragments')
-        plt.ylabel('Total Conflicts')
-        plt.grid(True)
-        plt.savefig(os.path.join(viz_dir, 'fragments_vs_conflicts.png'))
-        plt.close()
-
-        # Plot 3: Process Size (Activities) vs. Generation Time
-        plt.figure(figsize=(10, 6))
-        sns.scatterplot(data=df, x='activities', y='policy_generation_time', hue='fragmentation_strategy')
-        plt.title('Process Size (Activities) vs. Policy Generation Time')
-        plt.xlabel('Number of Activities')
-        plt.ylabel('Policy Generation Time (s)')
-        plt.grid(True)
-        plt.savefig(os.path.join(viz_dir, 'size_vs_generation_time.png'))
-        plt.close()
-
-        # Plot 4: Rule Distribution (Bar Plot)
-        rule_counts = df[['permissions', 'prohibitions', 'obligations']].sum()
-        plt.figure(figsize=(8, 6))
-        rule_counts.plot(kind='bar', color=['green', 'red', 'blue'])
-        plt.title('Distribution of Generated Rule Types')
-        plt.ylabel('Total Count')
-        plt.xticks(rotation=0)
-        plt.savefig(os.path.join(viz_dir, 'rule_distribution.png'))
-        plt.close()        # Plot 5: Reconstruction Accuracy (Histogram)
-        if len(df["reconstruction_accuracy"].dropna()) >= 2:
+        if 'fragments' in df.columns and 'activities' in df.columns:
             plt.figure(figsize=(10, 6))
-            sns.histplot(data=df, x="reconstruction_accuracy", kde=True, hue="fragmentation_strategy", multiple="stack")
-            plt.title("Distribution of Policy Reconstruction Accuracy")
-            plt.xlabel("Reconstruction Accuracy")
-            plt.ylabel("Frequency")
-            plt.grid(True)
-            plt.savefig(os.path.join(viz_dir, "reconstruction_accuracy.png"))
+            sns.scatterplot(data=df, x='activities', y='fragments', hue='fragmentation_strategy')
+            plt.title('Number of Fragments vs. Number of Activities')
+            plt.xlabel('Number of Activities')
+            plt.ylabel('Number of Fragments')
+            plt.savefig(os.path.join(self.visualizations_path, 'fragments_vs_activities.png'))
             plt.close()
-        else:
-            logger.warning("Skipping reconstruction accuracy histogram as there are fewer than 2 data points.")# Plot 6: Conflict Types (Stacked Bar)
-        conflict_types = df[['intra_fragment_conflicts', 'inter_fragment_conflicts']].sum()
-        plt.figure(figsize=(8, 6))
-        conflict_types.plot(kind='bar', stacked=True, color=['orange', 'purple'])
-        plt.title('Distribution of Conflict Types')
-        plt.ylabel('Total Count')
-        plt.xticks(rotation=0)
-        plt.savefig(os.path.join(viz_dir, 'conflict_distribution.png'))
-        plt.close()
 
-        logger.info(f"Visualizations saved to {viz_dir}")
+        if 'policy_generation_time' in df.columns and 'fragments' in df.columns:
+            plt.figure(figsize=(10, 6))
+            sns.scatterplot(data=df, x='fragments', y='policy_generation_time', hue='fragmentation_strategy')
+            plt.title('Policy Generation Time vs. Number of Fragments')
+            plt.xlabel('Number of Fragments')
+            plt.ylabel('Policy Generation Time (s)')
+            plt.savefig(os.path.join(self.visualizations_path, 'policy_time_vs_fragments.png'))
+            plt.close()
+
+        if 'total_conflicts' in df.columns and 'fragments' in df.columns:
+            plt.figure(figsize=(10, 6))
+            sns.scatterplot(data=df, x='fragments', y='total_conflicts', hue='fragmentation_strategy')
+            plt.title('Total Conflicts vs. Number of Fragments')
+            plt.xlabel('Number of Fragments')
+            plt.ylabel('Total Conflicts')
+            plt.savefig(os.path.join(self.visualizations_path, 'conflicts_vs_fragments.png'))
+            plt.close()
+
+        if 'policy_size_kb' in df.columns and 'fragments' in df.columns:
+            plt.figure(figsize=(10, 6))
+            sns.scatterplot(data=df, x='fragments', y='policy_size_kb', hue='fragmentation_strategy')
+            plt.title('Policy Size (KB) vs. Number of Fragments')
+            plt.xlabel('Number of Fragments')
+            plt.ylabel('Policy Size (KB)')
+            plt.savefig(os.path.join(self.visualizations_path, 'policy_size_vs_fragments.png'))
+            plt.close()
+
+        if 'reconstruction_accuracy' in df.columns and not df['reconstruction_accuracy'].dropna().empty:
+            if len(df['reconstruction_accuracy'].dropna().unique()) >= 2:
+                try:
+                    plt.figure(figsize=(10, 6))
+                    sns.histplot(data=df, x='reconstruction_accuracy', kde=True, hue='fragmentation_strategy', multiple="stack")
+                    plt.title('Distribution of Policy Reconstruction Accuracy')
+                    plt.xlabel('Reconstruction Accuracy')
+                    plt.ylabel('Frequency')
+                    plt.savefig(os.path.join(self.visualizations_path, 'reconstruction_accuracy_distribution.png'))
+                    plt.close()
+                except np.linalg.LinAlgError as e:
+                    logger.warning(f"Could not generate reconstruction accuracy histogram with KDE due to LinAlgError: {e}. Skipping this plot.")
+                except Exception as e:
+                    logger.warning(f"An unexpected error occurred while generating reconstruction accuracy histogram: {e}. Skipping this plot.")
+            else:
+                logger.warning("Skipping reconstruction accuracy histogram as there are fewer than 2 unique data points.")
+        else:
+            logger.warning("Skipping reconstruction accuracy histogram as 'reconstruction_accuracy' column is missing or empty.")
+
+        avg_metrics = {
+            'Permissions': df['permissions'].mean() if 'permissions' in df.columns else 0,
+            'Prohibitions': df['prohibitions'].mean() if 'prohibitions' in df.columns else 0,
+            'Obligations': df['obligations'].mean() if 'obligations' in df.columns else 0,
+            'Intra-Fragment Conflicts': df['intra_fragment_conflicts'].mean() if 'intra_fragment_conflicts' in df.columns else 0,
+            'Inter-Fragment Conflicts': df['inter_fragment_conflicts'].mean() if 'inter_fragment_conflicts' in df.columns else 0
+        }
+        avg_df = pd.DataFrame(list(avg_metrics.items()), columns=['Metric', 'Average Value'])
+        
+        if not avg_df.empty:
+            plt.figure(figsize=(12, 7))
+            sns.barplot(data=avg_df, x='Metric', y='Average Value')
+            plt.title('Average Policy and Conflict Metrics')
+            plt.ylabel('Average Count')
+            plt.xticks(rotation=45, ha='right')
+            plt.tight_layout()
+            plt.savefig(os.path.join(self.visualizations_path, 'average_metrics_barchart.png'))
+            plt.close()
+
+        logger.info(f"Visualizations saved to {self.visualizations_path}")
 
     def generate_summary_report(self):
-        """
-        Generate a summary report in Markdown format.
-        """
         report_path = os.path.join(self.output_path, 'summary_report.md')
-        summary = self.results['summary']
-
         with open(report_path, 'w') as f:
-            f.write("# BPFragmentODRL Evaluation Summary Report\n\n")
-            f.write(f"Report generated on: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n\n")
-            f.write("## Evaluation Configuration\n")
-            f.write(f"- Dataset Path: `{self.dataset_path}`\n")
-            f.write(f"- Output Path: `{self.output_path}`\n")
-            f.write(f"- Fragmentation Strategy: `{self.fragmentation_strategy}`\n")
-            f.write(f"- Policy Generator Type: `{self.policy_generator_type}`\n\n")
+            f.write("# Evaluation Summary Report\n\n")
+            f.write(f"* Date: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
+            f.write(f"* Dataset: {self.dataset_path}\n")
+            f.write(f"* Fragmentation Strategy: {self.fragmentation_strategy}\n")
+            f.write(f"* Policy Generator Type: {self.policy_generator_type}\n")
+            f.write(f"* Output Path: {self.output_path}\n\n")
             
             f.write("## Overall Summary\n")
-            f.write(f"- Total Models Processed: {summary['total_models']}\n")
-            f.write(f"- Successful Models: {summary['successful_models']}\n")
-            f.write(f"- Failed Models: {summary['failed_models']}\n\n")
+            f.write(f"- Total Models Processed: {self.results['summary']['total_models']}\n")
+            f.write(f"- Successful Models: {self.results['summary']['successful_models']}\n")
+            f.write(f"- Failed Models: {self.results['summary']['failed_models']}\n")
             
-            if summary['successful_models'] > 0:
-                f.write("## Average Metrics (for successful models)\n")
-                f.write(f"- Average Activities per Model: {summary['avg_activities']:.2f}\n")
-                f.write(f"- Average Fragments per Model: {summary['avg_fragments']:.2f}\n")
-                f.write(f"- Average Policy Generation Time (s): {summary['avg_policy_generation_time']:.4f}\n")
-                f.write(f"- Average Permissions: {summary['avg_permissions']:.2f}\n")
-                f.write(f"- Average Prohibitions: {summary['avg_prohibitions']:.2f}\n")
-                f.write(f"- Average Obligations: {summary['avg_obligations']:.2f}\n")
-                f.write(f"- Average Intra-fragment Conflicts: {summary['avg_intra_conflicts']:.2f}\n")
-                f.write(f"- Average Inter-fragment Conflicts: {summary['avg_inter_conflicts']:.2f}\n")
-                f.write(f"- Average Policy Reconstruction Accuracy: {summary['avg_reconstruction_accuracy']:.2%}\n")
-                f.write(f"- Average Policy Size (KB): {summary['avg_policy_size_kb']:.2f}\n\n")
+            if self.results['summary']['successful_models'] > 0:
+                f.write("\n## Average Metrics (for successful models)\n")
+                for key, value in self.results['summary'].items():
+                    if key.startswith('avg_'):
+                        f.write(f"- {key.replace('avg_', '').replace('_', ' ').capitalize()}: {value:.2f}\n")
             
-            f.write("## Visualizations\n")
+            f.write("\n## Failed Models\n")
+            if self.results['summary']['failed_models'] > 0:
+                for model_res in self.results['models']:
+                    if model_res['status'] == 'failed':
+                        f.write(f"- **{model_res['model_name']}**: {model_res.get('error', 'Unknown error')}\n")
+            else:
+                f.write("No models failed during processing.\n")
+            
+            f.write("\n## Visualizations\n")
             f.write("Visualizations are saved in the `visualizations` subdirectory.\n")
-            f.write("- Activities vs. Rules: `visualizations/activities_vs_rules.png`\n")
-            f.write("- Fragments vs. Conflicts: `visualizations/fragments_vs_conflicts.png`\n")
-            f.write("- Process Size vs. Generation Time: `visualizations/size_vs_generation_time.png`\n")
-            f.write("- Rule Distribution: `visualizations/rule_distribution.png`\n")
-            f.write("- Reconstruction Accuracy: `visualizations/reconstruction_accuracy.png`\n")
-            f.write("- Conflict Distribution: `visualizations/conflict_distribution.png`\n\n")
-            
-            f.write("## Detailed Results\n")
-            f.write("Detailed model-by-model results are available in `results.csv` and `evaluation_results.json`.\n")
 
         logger.info(f"Summary report saved to {report_path}")
-        return report_path
+        return report_path # Return the path to the report
 
 if __name__ == '__main__':
-    # Example usage (for testing the pipeline directly)
-    parser = argparse.ArgumentParser(description='BPFragmentODRL Evaluation Pipeline - Direct Test')
-    parser.add_argument('--dataset', type=str, default='../datasets/FBPM/FBPM2-ProcessModels', help='Path to the dataset directory')
-    parser.add_argument('--output', type=str, default='../results_pipeline_test', help='Path to the output directory')
-    parser.add_argument('--strategy', type=str, default='gateway', choices=['gateway', 'activity', 'connected', 'hierarchical'], help='Fragmentation strategy')
-    parser.add_argument('--generator', type=str, default='rule_based', choices=['rule_based', 'llm_based'], help='Policy generator type')
-    parser.add_argument('--max_models', type=int, default=2, help='Maximum number of models to process')
+    parser = argparse.ArgumentParser(description="Run BPFragmentODRL Evaluation Pipeline")
+    parser.add_argument('--dataset', type=str, required=True, help="Path to the dataset directory")
+    parser.add_argument('--output', type=str, default='results', help="Path to the output directory")
+    parser.add_argument('--strategy', type=str, default='gateway', 
+                        choices=['gateway', 'activity', 'connected', 'hierarchical'], 
+                        help="Fragmentation strategy")
+    parser.add_argument('--max_models', type=int, default=0, help="Maximum number of models to process (0 for all)")
+    parser.add_argument('--policy_generator_type', type=str, default='rule_based', 
+                        choices=['rule_based', 'llm_based'], 
+                        help="Type of policy generator to use ('rule_based' or 'llm_based')")
+
     args = parser.parse_args()
-
-    # Create output directory if it doesn't exist
-    os.makedirs(args.output, exist_ok=True)
-
-    pipeline = EvaluationPipeline(args.dataset, args.output, args.strategy, args.generator)
-    pipeline.run_evaluation(args.max_models)
-    pipeline.generate_visualizations()
-    pipeline.generate_summary_report()
-    print(f"Pipeline test completed. Results in {args.output}")
+    
+    logger.info(f"Starting evaluation at {datetime.now()}")
+    logger.info(f"Configuration: dataset={args.dataset}, output={args.output}, strategy={args.strategy}, max_models={args.max_models}, policy_generator_type={args.policy_generator_type}")
+    
+    pipeline = EvaluationPipeline(args.dataset, args.output, args.strategy, args.policy_generator_type)
+    report_file = None # Initialize report_file
+    start_total_time = time.time()
+    try:
+        logger.info("Running evaluation pipeline...")
+        pipeline.run_evaluation(max_models=args.max_models)
+        logger.info("Generating visualizations...")
+        pipeline.generate_visualizations()
+        logger.info("Generating summary report...")
+        report_file = pipeline.generate_summary_report() # Assign returned path
+    except Exception as e:
+        logger.error(f"ERROR: Evaluation failed: {str(e)}", exc_info=True)
+        print(f"ERROR: Evaluation failed: {str(e)}") 
+        sys.exit(1)
+    finally:
+        end_total_time = time.time()
+        total_duration = end_total_time - start_total_time
+        logger.info(f"Evaluation completed at {datetime.now()}")
+        logger.info(f"Total duration: {datetime.utcfromtimestamp(total_duration).strftime('%H:%M:%S.%f')[:-3]}")
+        
+        print("\n================================================================================")
+        print("EVALUATION COMPLETED SUCCESSFULLY" if pipeline.results['summary']['failed_models'] == 0 else "EVALUATION COMPLETED WITH ERRORS")
+        print("================================================================================")
+        print(f"Results saved to: {os.path.abspath(args.output)}")
+        if report_file: # Check if report_file is not None before printing
+            print(f"Summary report: {os.path.abspath(report_file)}")
+        else:
+            print(f"Summary report: Not generated due to an earlier error or empty results.")
+        print(f"Total duration: {datetime.utcfromtimestamp(total_duration).strftime('%H:%M:%S.%f')[:-3]}")
+        print("================================================================================\n")
 
